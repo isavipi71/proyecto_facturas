@@ -7,7 +7,7 @@ const swaggerDefinition = {
     },
     servers: [
       {
-        url: "http://localhost:3000",
+        url: "http://localhost:3000/api/v1",
         description: "Servidor local de desarrollo"
       }
     ],
@@ -28,7 +28,7 @@ const swaggerDefinition = {
                         }
                       }
                     }
-                  },
+                  }
                 },
                 "default": {
                   description: "Error al saludar al mundo",
@@ -54,24 +54,25 @@ const swaggerDefinition = {
                   schema: {
                     type: "object",
                     properties: {
-                      servicios: { type: "string" },
-                      cantidad: { type: "integer" },
-                      precio: { type: "number" },
-                      impuesto: { type: "number" },
+                      id:{ type: "int"},
+                      servicio: { type: "string"},
+                      cantidad: { type: "int" },
+                      precio: { type: "decimal" },
+                      impuesto: { type: "int" },
                       fecha_factura: { type: "string", format: "date" },
-                      referencia_pago: { type: "string" },
+                      referencia_pago: { type: "int" },
                       fecha_vencimiento: { type: "string", format: "date" },
-                      total: { type: "number" }
+                      total: { type: "decimal" }
                     }
                   }
                 }
               }
             },
             responses: {
-              "201": {
+              "200": {
                 description: "Datos insertados correctamente"
               },
-              "500": {
+              "400": {
                 description: "Error al insertar la factura",
                 content: {
                   "application/json": {
@@ -83,20 +84,149 @@ const swaggerDefinition = {
               }
             }
           }
-        }
       },
-        components: {
-          schemas: {
-            Error: {
-              type: "object",
-              properties: {
-                status: { type: "integer" },
-                message: { type: "string" }
+      "/read": {
+        get: {
+          summary: "Obtener todas las facturas",
+          description: "Obtiene todas las facturas almacenadas en la base de datos.",
+          responses: {
+            "200": {
+              description: "Lista de facturas obtenida correctamente",
+              content: {
+                "application/json": {
+                  schema: {
+                    type: "array",
+                    items: {
+                      type: "object",
+                      properties: {
+                        id: { type: "integer" },
+                        servicio: { type: "string" },
+                        cantidad: { type: "integer" },
+                        precio: { type: "decimal" },
+                        impuesto: { type: "integer" },
+                        fecha_factura: { type: "string", format: "date" },
+                        referencia_pago: { type: "integer" },
+                        fecha_vencimiento: { type: "string", format: "date" },
+                        total: { type: "decimal" }
+                      }
+                    }
+                  }
+                }
+              }
+           },
+            "400": {
+              description: "Error al obtener las facturas",
+              content: {
+                "application/json": {
+                  schema: {
+                    $ref: "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+    },
+    "/delete/{id}": {
+      delete: {
+        summary: "Borrar una factura",
+        description: "Borra una factura específica según su ID.",
+        parameters: [
+          {
+            in: "path",
+            name: "id",
+            required: true,
+            schema: {
+              type: "integer"
+            },
+            description: "ID de la factura a borrar"
+          }
+        ],
+        responses: {
+          "200": {
+            description: "Factura borrada correctamente"
+          },
+          "500": {
+            description: "Error al borrar la factura",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/editar": {
+      put: {
+        summary: "Actualizar una factura",
+        description: "Actualiza una factura existente en la base de datos según su id",
+        parameters: [
+          {
+            in: "path",
+            name: "id",
+            required: true,
+            schema: {
+              type: "integer"
+            },
+            description: "ID de la factura a actualizar"
+          }
+        ],
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": {
+              schema: {
+                type: "object",
+                properties: {
+                  id: { type: "integer" },
+                  servicio: { type: "string" },
+                  cantidad: { type: "integer" },
+                  precio: { type: "decimal" },
+                  impuesto: { type: "integer" },
+                  fecha_factura: { type: "string", format: "date" },
+                  referencia_pago: { type: "integer" },
+                  fecha_vencimiento: { type: "string", format: "date" },
+                  total: { type: "decimal" }
+                }
+              }
+            }
+          }
+        },
+        responses: {
+          "200": {
+            description: "Factura actualizada correctamente"
+          },
+          "400": {
+            description: "Error al actualizar la factura",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  components: {
+      schemas: {
+        Error: {
+          type: "object",
+          properties: {
+            status: { type: "integer" },
+            message: { type: "string" }
               }
             }
           }
         }
       };
+
+
 /**
  * @swagger
  * /api/v1/insert:
@@ -129,103 +259,52 @@ const swaggerDefinition = {
  *               total:
  *                 type: number
  *     responses:
- *       '201':
+ *       '200':
  *         description: Datos insertados correctamente.
  *       '500':
  *         description: Error al insertar la factura.
+ */ 
+   
+/**
+* @swagger
+ * /api/v1/delete:
+ *   delete:
+ *     summary: Eliminar una factura
+ *     description: Eliminar una factura de la base de datos.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: integer
+ *                 description: ID de la factura a eliminar
+ *                 example: 1
+ *     responses:
+ *       200:
+ *         description: Factura eliminada correctamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 mensaje:
+ *                   type: string
+ *                   description: Mensaje de éxito
+ *       400:
+ *         description: Error en el proceso de eliminación
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 mensaje:
+ *                   type: string
+ *                   description: Mensaje de error
  */
 
-// Ruta para insertar una factura
-// // // /**
-// // //  * @swagger
-// // //  * /insert:
-// // //  *   post:
-// // //  *     summary: insertar una factura en la base de datos.
-// // //  *     description: a través de nuestra api, insertar una factura en la tabla de tareas.
-// // //  *     parameters:
-// // //  *     - in: body
-// // //  *         name: servicio
-// // //  *         required: true
-// // //  *         description: descripcion del servicio que desea insertar en la base de datos.
-// // //  *         schema:
-// // //  *           type: string
-// // //  *           example: limpieza a fondo
-// // //  *     - in: body
-// // //  *         name: cantidad
-// // //  *         required: true
-// // //  *         description: cuantos servicios son en total.
-// // //  *         schema:
-// // //  *           type: int
-// // //  *           example: 100.00
-// // //  *     - in: body
-// // //  *         name: precio
-// // //  *         required: true
-// // //  *         description: coste de lo que cuesta el servicio
-// // //  *         schema:
-// // //  *           type:  decimal()
-// // //  *           example: 100.00
-// // //  *     - in: body
-// // //  *         name: impuesto
-// // //  *         required: true
-// // //  *         description: impuesto de retencion irpf iva%
-// // //  *         schema:
-// // //  *           type: int
-// // //  *           example: 21%
-// // //  *     - in: body
-// // //  *         name: fecha_factura
-// // //  *         required: true
-// // //  *         description: fecha de creación de la factura en formato yyyy-mm-dd.
-// // //  *         schema:
-// // //  *           type: string
-// // //  *           format: date
-// // //  *           example: 2024-01-01
-// // //  *     - in: body
-// // //  *         name: referencia_pago
-// // //  *         required: true
-// // //  *         description:  descripcion de si el pago es a cuenta, espcificar cuenta bancaria o cualquier otra referencia
-// // //  *         schema:
-// // //  *           type: string
-// // //  *           example: cuenta bancaria es79 0987 1234 5678 1234
-// // //  *     - in: body
-// // //  *         name: fecha_vencimiento
-// // //  *         required: true
-// // //  *         description: fecha en que va a vencer la factura en formato yyyy-mm-dd.
-// // //  *         schema:
-// // //  *           type: string
-// // //  *           format: date
-// // //  *           example: 2024-01-01
-// // //  *     - in: body
-// // //  *         name: total
-// // //  *         required: true
-// // //  *         description: valor total con impuesto incluidos
-// // //  *         schema:
-// // //  *           type: string
-// // //  *           format: decimal()
-// // //  *           example: 120, 12
-// // //  *     responses:
-// // //  *       200:
-// // //  *         description: factura introducida correctamente.
-// // //  *       400:
-// // //  *         description: error de ruta.
-// // //  *         content:
-// // //  *           application/json:
-// // //  *             schema:
-// // //  *               type: object
-// // //  *               properties:
-// // //  *                 error:
-// // //  *                   type: string
-// // //  *                   description: mensaje de error.
-// // //  *       500:
-// // //  *         description: error del servidor.
-// // //  *         content:
-// // //  *           application/json:
-// // //  *             schema:
-// // //  *               type: object
-// // //  *               properties:
-// // //  *                 error:
-// // //  *                   type: string
-// // //  *                   description: mensaje de error.
-// // //  */
 
 
 module.exports = swaggerDefinition;

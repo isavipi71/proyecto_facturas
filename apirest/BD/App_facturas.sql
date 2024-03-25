@@ -20,11 +20,11 @@ USE `AppFacturas` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AppFacturas`.`clientes` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `Dirección` VARCHAR(45) NOT NULL,
-  `Teléfono` VARCHAR(9) NULL,
-  `Correo electrónico` VARCHAR(150) NULL,
   `Nombres` VARCHAR(150) NULL,
   `NIF` VARCHAR(10) NULL,
+  `Dirección` VARCHAR(45) NOT NULL,
+  `Teléfono` VARCHAR(12) NULL,
+  `Correo electrónico` VARCHAR(100) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -46,14 +46,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AppFacturas`.`facturas` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `servicio` VARCHAR(45) NULL,
-  `cantidad` INT NULL,
-  `precio` DECIMAL(6,2) NULL,
-  `impuesto` INT NULL,
-  `fecha_factura` DATE NULL,
-  `referencia_pago` VARCHAR(45) NULL,
-  `fecha_vencimiento` DATE NULL,
-  `total` DECIMAL(6,2) NULL,
+  `Servicio` VARCHAR(45) NULL,
+  `Cantidad` INT NULL,
+  `Precio` DECIMAL(6,2) NULL,
+  `Impuesto` INT NULL,
+  `Fecha_factura` DATE NULL,
+  `Referencia_pago` VARCHAR(45) NULL,
+  `Fecha_vencimiento` DATE NULL,
+  `Total` DECIMAL(6,2) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
