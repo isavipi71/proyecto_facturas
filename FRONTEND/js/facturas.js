@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Función para mostrar los botones de factura
     function mostrarBotonesFactura() {
         const seccionDerecha = document.getElementById('seccion_derecha');
+        seccionDerecha.innerHTML = "";
         const facturasButtonsDiv = document.createElement('div');
         facturasButtonsDiv.id = 'facturas-buttons';
 
@@ -44,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Función para mostrar el formulario de agregar factura
     function mostrarFormularioFactura() {
         console.log("mostrar Formulario Factura");
-        const facturaForm = document.getElementById('formulario-factura');
+        const facturaForm = document.getElementById("formulario-factura");
         facturaForm.style.display = 'block'; // Mostrar el formulario
     }
 });
