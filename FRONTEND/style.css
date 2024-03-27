@@ -1,19 +1,18 @@
-*{
+@import url('https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap');
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap');
-
-body{
+body {
     font-family: "Tenor Sans", sans-serif;
     font-weight: 400;
     font-style: normal;
-    display: flex;
+}
 
-  }
-  .menu-hamburguesa {
+.menu-hamburguesa {
     display: none;
     justify-content: center;
     align-items: center;
@@ -22,48 +21,131 @@ body{
     height: 50px;
     cursor: pointer;
 }
+
 .menu-hamburguesa i {
     font-size: 24px;
     color: #333;
 }
 
-  
-#seccion_izquierda{
-    width: 40%;
+.contenedor-secciones {
     display: flex;
-    flex-direction: column;
-    background-color: #f0f0f0;
-}  
+}
 
-#seccion_derecha{
-    width: 60%;
-background-color: #fff;}
 
-.contenedor{
+.contenedor_menu {
     padding: 30px;
 }
 
-#iconos{
+#iconos {
     width: 10%;
     margin-right: 5px;
 }
-a{
+
+a {
     text-decoration: none;
-    font-family: "Tenor Sans" ;
+    font-family: "Tenor Sans";
     font-weight: 800;
     color: black;
 }
-a:hover{
+
+a:hover {
     background-color: white;
 }
 
+#seccion_derecha {
+    flex: 1; /* Ambas secciones toman el mismo espacio disponible */
+    background-color: rgb(196, 221, 242);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2)
+}
+
+
 #dashboard {
     background-color: #fff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Ajusta la sombra según tu preferencia */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     padding: 20px;
     margin: 20px;
     border-radius: 5px;
 }
+/*formulario de facaturas*/
+
+#contenedor_form {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px 0;
+}
+
+.col_100 {
+    width: 100%;
+    padding: 20px;
+}
+
+.col_50 {
+    width: 50%;
+    padding: 20px;
+}
+
+.col_33 {
+    width: 33%;
+    padding: 20px;
+
+}
+
+/* Para evitar que el último elemento de una fila tenga margen derecho */
+.contenedor_form > div {
+    margin-right: 10px;
+}
+ 
+
+/* Para asegurar que los elementos en una fila no tengan margen derecho */
+.contenedor_form > div:last-child {
+    margin-right: 0;
+} 
+
+/* Estilo adicional para los elementos de ancho 50% */
+@media screen and (max-width: 768px) {
+    .col_50 {
+        width: 100%; /* Cambia el ancho a 100% en pantallas más pequeñas */
+    }
+} 
+
+#contenedorFacturasCreadas {
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    /* Ajusta la sombra según tu preferencia */
+    padding: 20px;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+/* Estilo para los botones dentro de #facturas-buttons */
+#facturas-buttons {
+    display: flex;
+    justify-content: space-around;
+    /* separaamos los botones horizontalmente */
+    margin-top: 20px;
+    /* Añadimos un margen superior para separarlo del formulario */
+
+}
+
+/* Estilo para los botones */
+button {
+    background-color: rgb(2, 83, 115);
+    color: white;
+    border: none;
+    cursor: pointer;
+    /* Cambiamos el cursor al pasar sobre el botón */
+    transition: background-color 0.3s;
+    /* Agregamos una transición suave al color de fondo */
+}
+
+/* Estilo para los botones al pasar el mouse */
+button:hover {
+    background-color: #055a80;
+}
+
+
+
 
 
 /* Estilos para dispositivos móviles */
@@ -71,9 +153,37 @@ a:hover{
     .menu-hamburguesa {
         display: flex;
     }
+
     #seccion_izquierda {
         display: none;
     }
 }
 
 
+.contenedor-formulario {
+    width: calc(100% - 200px);  /* Asegurar que ocupe todo el ancho disponible */
+}
+
+.fila {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px; /* Espacio entre las filas */
+}
+
+.fila > div {
+    margin-right: 10px; /* Espacio entre los elementos */
+}
+
+
+
+.input-grande {
+    flex-basis: 100%; /* Ocupa todo el ancho disponible */
+}
+
+.input-mediano {
+    flex-basis: 50%; /* Ocupa el 50% del ancho disponible */
+}
+
+.input-pequeno {
+    flex-basis: calc(33.33% - 5px); /* Ocupa aproximadamente el 33.33% del ancho disponible, restando el espacio entre elementos */
+}
