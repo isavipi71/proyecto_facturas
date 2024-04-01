@@ -4,82 +4,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="./js/facturas.js" defer></script>
-  <link rel="stylesheet" href="./css/style.css">
+
   <link rel="stylesheet" href="./css/facturas.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <script src="./js/facturas.js" defer></script>
+  
   <title>PROYECTO FINAL</title>
-
 </head>
+
 <body>
-  <div class="contenedor-secciones">
-     <div id="seccion_izquierda">
-      <div class="menu-hamburguesa" onclick="toggleMenu()">
-        <i class="fas fa-bars"></i>
-      </div>
-        <div class="contenedor_menu">
-          <img id="iconos" src="./img/factura.png" alt="">
-          <a href="#facturas">Facturas</a>
-        </div>
-        <div class="contenedor_menu">
-          <img id="iconos" src="./img/business-people.png" alt="">
-          <a href="#clientes">Clientes</a>
-        </div>
+    <div id="facturas">
 
-        <div class="contenedor_menu">
-          <img id="iconos" src="./img/public-service.png" alt="">
-          <a href="#servicios">Servicios</a>
-        </div>
-
-        <div class="contenedor_menu">
-          <img id="iconos" src="./img/employees.png" alt="">
-          <a href="#empleados">Empleados</a>
-        </div>
-
-        <div class="contenedor_menu">
-          <img id="iconos" src="./img/reporte-de-negocios.png" alt="">
-          <a href="#reportes">Reportes</a>
-        </div>
-
-        <div class="contenedor_menu">
-          <img id="iconos" src="./img/tareas.png" alt="">
-          <a href="#tareas">Tareas</a>
-        </div>
-    </div>
-  
-    <div id="seccion_derecha">
-     <div id="dashboard">
-       <!-- Contenido del dashboard  -->
-    </div>
-  
-      <form id="formulario-factura" style="display: none;">
+      <form id="formulario-factura">
+        
         <div id="contenedor_form">
           <div class="col_100">
           <label for="id">Factura Número:</label>
           <input type="text" id="id" name="id">
-        </div>
+          </div>
         </div>
 
         <div id="contenedor_form">
-        <div class="col_100">
+          <div class="col_100">
           <label for="cliente">Cliente:</label>
           <select id="cliente" name="cliente"></select>
-        </div>
+          </div>
         </div>
 
         <div id="contenedor_form">
-        <div class="col_50">
+          <div class="col_50">
           <label for="fecha">Factura Fecha:</label>
-          <input type="date" id="fecha" name="factura_fecha" required>
-         </div>
-         </div>
+          <input type="date" id="fecha" name="fecha" required>
+          </div>
+        </div>
 
-         <div id="contenedor_form">
+        <div id="contenedor_form">
          <div class="col_50">
           <label for="fecha_vencimiento">Fecha de vencimiento:</label>
           <input type="date" id="fecha_vencimiento" name="fecha_vencimiento" required>
           </div>
-          </div>
+        </div>
 
         <div id="contenedor_form">
           <div class="col_100">
@@ -93,30 +58,31 @@
           <label for="cantidad">Cantidad:</label>
           <input type="number" id="cantidad" name="cantidad" required>
           </div>
-          </div>
+        </div>
 
-      <div id="contenedor_form">
-        <div class="col_33">
+        <div id="contenedor_form">
+          <div class="col_33">
           <label for="precio">Precio:</label>
           <input type="number" id="precio" name="precio" required>
           </div>
-          </div>
+        </div>
 
-      <div id="contenedor_form">
+        <div id="contenedor_form">
           <div class="col_33">
           <label for="impuesto">Impuesto:</label>
           <input type="number" id="impuesto" name="impuesto">
+          </div>
         </div>
-        </div>
-        
-          <button type="submit">Agregar Factura</button>  
-       
-      </form> 
-  
 
-      <div id="contenedorFacturasCreadas"></div>
-    </div>
-    </div>
+        <div class="contenedor_guardarFactura">
+          <button type="button" id="agregar_factura">Guardar</button>
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+          <i class="fa-solid fa-arrow-rotate-left"></i>
+        </div> 
+        </form>
+        </div>
+
+        <div id="contenedorFacturasCreadas"></div>
 
 </body>
 </html>

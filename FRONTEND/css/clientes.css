@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap');
+/* Reset de estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Tenor Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: #f0f0f0;
+}
+.tarjeta {
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /*oculta el desbordamiento del co nte nido*/
+}
+
+.imagen {
+    width: 100%;
+    height: 40px;
+    margin: 30px;
+}
+
+.imagen i {
+    font-size: 20px; /* Tamaño de los iconos */
+    margin: 0 5px; /* Espaciado entre los iconos */
+}
+
+.imagen input[type="file"] {
+    display: none;
+}
+
+.upload-icon {
+    float: right; /* Alinear a la derecha */
+    cursor: pointer;
+    margin-right: 50px;
+}
+
+.tarjeta .informacion {
+    padding: 40px;
+}
+.tarjeta .informacion input{
+    margin-left: 50px;
+}
+
+
+.tarjeta .tipo {
+    margin-bottom: 10px;
+    font-size: 13px;
+    
+}
+
+.tarjeta .tipo input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.tarjeta .nombre,
+.tarjeta .direccion,
+.tarjeta .contacto {
+    margin-bottom: 50px;
+}
+
+.tarjeta .nombre input,
+.tarjeta .direccion input,
+.tarjeta .direccion select,
+.tarjeta .contacto input {
+    width: calc(100% - 10px);
+    padding: 8px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+
+.tarjeta .nif {
+    margin-bottom: 30px;
+}
+
+.tarjeta .nif input {
+    width: calc(100% - 10px);
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.tarjeta .contacto {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.tarjeta .contacto .telefono,
+.tarjeta .contacto .movil,
+.tarjeta .contacto .correo-electronico {
+    width: calc(33.33% - 10px);
+}
+
+.tarjeta .contacto label {
+    display: block;
+    margin-bottom: 5px;
+    
+
+}
+
+
+.tarjeta .contacto input {
+    width: calc(100% - 10px);
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+label{
+    margin-left: 20px;
+    font-size: 12px;
+}
+h3{
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+

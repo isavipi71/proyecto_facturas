@@ -1,0 +1,149 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#servicios {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  
+}
+
+.imagen {
+ width: 30%;
+ display: flex;
+ 
+}
+.imagen img {
+  width: 100%;
+  
+
+}
+
+.informacion {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(196, 221, 242);
+  padding: 50px;
+  border-radius: 10px;
+  max-width: 800px;
+}
+
+.contenido_nombre_servicio, .precio{
+  display: flex;
+  flex-direction: column;
+}
+
+.contenido_nombre_servicio>#servicio, #precio{
+    border: none; /* Elimina el borde */
+    outline: none; /* Elimina el contorno al enfocar */
+    background-color: transparent; /* Hace transparente el fondo */
+    border-bottom: 1px solid black; 
+    padding: 0; 
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.tipo{
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.tipo input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+#tipo2{
+  margin-left: 50px;
+}
+
+.precio{
+  margin-bottom: 30px;
+}
+.precio label{
+  margin-bottom: 10px;
+}
+
+.acordeon{
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+.acordeon-contenido {
+  display: none;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  margin-top: 2px;
+}
+
+.acordeon-btn {
+  background-color: rgb(2, 83, 115);
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.acordeon-btn:focus {
+  outline: none;
+}
+
+.acordeon-btn span {
+  margin-left: 5px;
+}
+
+.acordeon-btn.active span {
+  transform: rotate(45deg);
+}
+
+.acordeon-toggle {
+  display: none;
+}
+
+.acordeon-toggle:checked + .acordeon-contenido {
+  background-color: #f1f1f1;
+}
+
+.acordeon-toggle:checked + .acordeon-btn + .acordeon-contenido {
+  display: block;
+  max-height: 500px; /* ajusta este valor según sea necesario */
+}
+
+.contenedor_guardar-deshacer i {
+  margin: 30px 0px 0x 30px;
+  
+}
+.servicios_creados{
+  padding: 50px;
+  border-radius: 20px;
+  display: flex;
+
+}
+
+.servicio{
+  margin: 15px;
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 30%;
+  padding: 5px;
+  box-shadow: inset 0 -3em 3em rgb(196, 221, 242),
+  0 0 0 2px rgb(2, 83, 115),
+  0.3em 0.3em 1em rgb(196, 221, 242);
+  
+}
+
+.servicio button {
+  background-color: transparent; /* Elimina el fondo del botón */
+  border: none; /* Elimina el borde del botón */
+  cursor: pointer;
+  margin-right: 20px; /* Espacio entre los botones */
+}
+
+.servicio button:hover {
+  color: rgb(2, 83, 115); /* Cambia el color del icono al pasar el mouse sobre él */
+}

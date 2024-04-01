@@ -8,6 +8,9 @@
 
 
 /*formulario de facturas*/
+#formulario-factura{
+    display: none;
+}
 
 #contenedor_form {
     width: 100%;
@@ -48,16 +51,6 @@
     margin: 20px;
     border-radius: 5px;
 }
-
-
-
-
-
-
-
-
-
-
 
 
 .contenedor-formulario {
