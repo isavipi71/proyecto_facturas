@@ -9,18 +9,44 @@ function toggleMenu() {
 
 document.addEventListener('DOMContentLoaded', function () {
 // Obtener referencia al enlace de Facturas
-    const facturasLink = document.querySelector('.contenedor_menu a[href="facturas.html');
+    const facturasLink = document.getElementById('facturas');
+
     //  evento de clic al enlace de Facturas
     facturasLink.addEventListener('click', function (event) {
-        event.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
-        mostrarBotonesFactura(); // Mostrar los botones de añadir factura y ver facturas creadas
+        event.preventDefault(); 
+        cargarYMostrarBotonesFactura(); // Mostrar los botones de añadir factura y ver facturas creadas
     });
+});
+
+// Función para cargar el contenido de facturas.html y mostrar los botones
+function cargarYMostrarBotonesFactura() {
+    fetch('facturas.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('seccion_derecha').innerHTML = data;
+            cargarFacturasEventListeners(); // Agregar event listeners para los botones de facturas
+        });
+}
+// Event listeners de facturas
+function cargarFacturasEventListeners() {
+    // Evento de clic al botón "Crear Factura" para mostrar el formulario de creación de factura
+    document.getElementById('crear_factura').addEventListener('click', function (event) {
+        event.preventDefault();
+        mostrarFormularioFactura();
+    });
+
+    // Evento de clic al botón "Ver Facturas" para mostrar las facturas creadas
+    document.getElementById('ver_facturas').addEventListener('click', function (event) {
+        event.preventDefault();
+        mostrarFacturas();
+    });
+}
 
 // Función para mostrar los botones de factura
 function mostrarBotonesFactura() {
      const seccionDerecha = document.getElementById("seccion_derecha");
-        // seccionDerecha.innerHTML = "";
-    if (!seccionDerecha.querySelector('#facturas-buttons')) {
+    seccionDerecha.innerHTML = "";
+    
     const facturasButtonsDiv = document.createElement('div');
     facturasButtonsDiv.id = 'facturas-buttons';
 
@@ -39,8 +65,9 @@ function mostrarBotonesFactura() {
 
         // Agregar los botones al DOM
     seccionDerecha.appendChild(facturasButtonsDiv);
+    // event listeners a los botones
+    cargarFacturasEventListeners();
     }
-}
 
 // Función para mostrar el formulario de agregar factura
 function mostrarFormularioFactura() {
@@ -51,32 +78,57 @@ function mostrarFormularioFactura() {
      console.error("El elemento formulario-factura no se encontró en el DOM.");
         }
     }
+
+// Funcion para guardar la factura
+
+
+function guardarFactura() {
+    console.log("Guardar factura");
+
+    const id = document.getElementById('id').value;
+    const cliente = document.getElementById('cliente').value;
+   
+}
+
 // Función para ver las facturas existentes
 function verFacturas() {
-        //  lógica para mostrar las facturas existentes
-    console.log("Mostrar facturas existentes");
-    }
    
- document.addEventListener('DOMContentLoaded', function() {
-     // Obtener referencia al botón "Añadir Factura"
-    const agregarFacturaBtn = document.getElementById('agregar-factura-btn');
-    // Agregar evento de clic al botón "Añadir Factura" para mostrar el formulario
-        if (agregarFacturaBtn) {
-            agregarFacturaBtn.addEventListener('click', mostrarFormularioFactura);
-        } else {
-            console.error('No se encontró el botón "Añadir Factura" en el DOM.');
-        }
-        // Obtener referencia al botón "Ver Facturas"
-        const verFacturasBtn = document.getElementById('ver-facturas-btn');
-        // Agregar evento de clic al botón "Ver Facturas" para ver las facturas existentes
-        if (verFacturasBtn) {
-            verFacturasBtn.addEventListener('click', verFacturas);
-        } else {
-            console.error('No se encontró el botón "Ver Facturas" en el DOM.');
-        }
-    });  
+console.log("Mostrar facturas existentes");
 
-});
+}
+
+// Cuando el DOM esté cargado, mostrar los botones de factura
+document.addEventListener('DOMContentLoaded', mostrarBotonesFactura);
+
+// Event listeners de facturas
+  
+//  document.addEventListener('DOMContentLoaded', function() {
+//      // Obtener referencia al botón "Añadir Factura"
+//     const agregarFacturaBtn = document.getElementById('agregar-factura-btn');
+//         if (agregarFacturaBtn) {
+//             agregarFacturaBtn.addEventListener('click', mostrarFormularioFactura);
+//         } else {
+//             console.error('No se encontró el botón "Añadir Factura" en el DOM.');
+//         }
+// // Obtener referencia al botón "Guardar"
+// const guardarBtn = document.getElementById('agregar_factura');
+// if (guardarBtn) {
+//     guardarBtn.addEventListener('click', guardarFactura);
+// } else {
+//     console.error('No se encontró el botón "Guardar" en el DOM.');
+// }
+
+//  // Obtener referencia al botón "Ver Facturas"
+//         const verFacturasBtn = document.getElementById('ver-facturas-btn');
+//         if (verFacturasBtn) {
+//             verFacturasBtn.addEventListener('click', verFacturas);
+//         } else {
+//             console.error('No se encontró el botón "Ver Facturas" en el DOM.');
+//         }
+//     });  
+
+
+
 
 
 
