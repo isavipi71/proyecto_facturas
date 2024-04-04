@@ -1,15 +1,19 @@
 const express = require("express");
 const cors = require("cors");
-const port = process.env.PORT || 3000; 
+const port = process.env.PORT || 4000; 
 const api = express();
 
 // Middleware
 api.use(cors());
 api.use(express.json());
 
+// Importar las rutas
+const clientesRoutes = require('./routes/clientes.routes');
+const facturasRoutes = require('./routes/facturas.routes');
+
 // Rutas
-app.use('/api/v1/clientes', require('./routes/clientes.routes'));
-app.use('/api/v1/facturas', require('./routes/facturas.routes'));
+api.use('/api/v1/clientes', clientesRoutes);
+api.use('/api/v1/facturas', facturasRoutes);
 
 // go to: http://localhost:3000/api-docs/ for api documentation
 require("./swagger/swagger.config.js")(api);
