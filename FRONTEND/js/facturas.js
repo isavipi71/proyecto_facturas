@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 function toggleMenu() {
     var seccionIzquierda = document.getElementById("seccion_izquierda");
     if (seccionIzquierda.style.display === "none") {
@@ -50,7 +49,7 @@ function mostrarBotonesFactura() {
     
     const facturasButtonsDiv = document.createElement('div');
     facturasButtonsDiv.id = 'facturas-buttons';
-=======
+
 const botonGuardarFactura = document.querySelector("#GuardarFactura");
 const mensajes = document.querySelector("#mensajes");
 //crear una factura
@@ -98,7 +97,6 @@ botonGuardarFactura.addEventListener("click", () => {
 });
 
 //obtener las facturas
->>>>>>> 4a37cf8 (commit)
 
 function obtenerTodasLasFacturas() {
     fetch('http://localhost:4000/api/v1/facturas')
@@ -117,7 +115,7 @@ function obtenerTodasLasFacturas() {
       });
   }
 
-<<<<<<< HEAD
+
         // Botón de ver facturas creadas
     const verFacturasBtn = document.createElement('button');
     verFacturasBtn.id = 'ver-facturas-btn';
@@ -129,7 +127,7 @@ function obtenerTodasLasFacturas() {
     // event listeners a los botones
     cargarFacturasEventListeners();
     }
-=======
+
 obtenerTodasLasFacturas();
   
 // Actualizar una factura
@@ -155,7 +153,7 @@ function actualizarFactura(id, datosActualizados) {
         console.error('Error:', error);
     });
 }
->>>>>>> 4a37cf8 (commit)
+
 
 // Borrar una factura
 function borrarFactura(id) {
@@ -164,9 +162,9 @@ function borrarFactura(id) {
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error('Error al borrar la factura');
-        }
-<<<<<<< HEAD
+            throw new Error('Error al borrar la factura');}
+        });
+
     }
 
 // Funcion para guardar la factura
@@ -188,7 +186,7 @@ console.log("Mostrar facturas existentes");
 }
 
 // Cuando el DOM esté cargado, mostrar los botones de factura
-document.addEventListener('DOMContentLoaded', mostrarBotonesFactura);
+//document.addEventListener('DOMContentLoaded', mostrarBotonesFactura);
 
 // Event listeners de facturas
   
@@ -217,20 +215,70 @@ document.addEventListener('DOMContentLoaded', mostrarBotonesFactura);
 //         }
 //     });  
 
+//         console.log('Factura borrada correctamente');
+//         // Aquí puedes realizar acciones adicionales después de borrar la factura, si es necesario
+//     })
+//     .catch(error => {
+//         console.error('Error:', error);
+//     });
+// }
 
 
-=======
-        console.log('Factura borrada correctamente');
-        // Aquí puedes realizar acciones adicionales después de borrar la factura, si es necesario
+
+
+
+// Agregar eventos de entrada para calcular el total automáticamente
+cantidadInput.addEventListener('input', calcularTotal);
+precioInput.addEventListener('input', calcularTotal);
+impuestoInput.addEventListener('input', calcularTotal);
+
+
+const botonGuardarFactura = document.querySelector("#GuardarFactura");
+const mensajes = document.querySelector("#mensajes");
+//crear una factura
+botonGuardarFactura.addEventListener("click", () => {
+   const idCliente = document.querySelector("#cliente").value;
+   const idFactura = document.querySelector("#id").value;
+   const direccion = document.querySelector("#direccion").value;
+   const fecha = document.querySelector("#fecha").value;
+   const referenciaPago = document.querySelector("#referencia").value;
+   const fechaVencimiento = document.querySelector("#fecha_vencimiento").value;
+   const servicio = document.querySelector("#servicio").value;
+   const cantidad = document.querySelector("#cantidad").value;
+   const precio = document.querySelector("#precio").value;
+   const impuesto = document.querySelector("#impuesto").value;
+   const total = document.querySelector("#total").value;
+   // Enviar datos al servidor
+   const url = "http://localhost:4000/api/v1/facturas";
+   fetch(url, {
+       method: "post",
+       headers: { "Content-Type": "application/json" },
+       body: JSON.stringify({
+           idCliente: idCliente,
+           idFactura: idFactura,
+           direccion: direccion,
+           fecha: fecha,
+           referenciaPago: referenciaPago,
+           fechaVencimiento: fechaVencimiento,
+           servicio: servicio,
+           cantidad: cantidad,
+           precio: precio,
+           impuesto: impuesto,
+           total: total
+        })
     })
-    .catch(error => {
-        console.error('Error:', error);
+    .then((res) => res.json())
+    .then((mensaje) => {
+        mensajes.innerHTML = "Factura creada correctamente.";
+        setTimeout(() => {
+            location.reload(); // Refresca la página después de 3 segundos
+        }, 3000);
+    })
+    .catch((error) => {
+        mensajes.innerHTML = "Error al crear la factura: " + error;
     });
-}
-
-
-
-
+ });
+ 
 // Obtener los elementos del formulario
 const cantidadInput = document.getElementById('cantidad');
 const precioInput = document.getElementById('precio');
@@ -247,18 +295,12 @@ function calcularTotal() {
   totalInput.value = total.toFixed(2); // Redondear a 2 decimales
 }
 
-// Agregar eventos de entrada para calcular el total automáticamente
-cantidadInput.addEventListener('input', calcularTotal);
-precioInput.addEventListener('input', calcularTotal);
-impuestoInput.addEventListener('input', calcularTotal);
 
-            
         
 
 
 
     
->>>>>>> 4a37cf8 (commit)
 
 
 
