@@ -1,3 +1,4 @@
+
 const express = require('express');
 const router = express.Router();
 const cors = require("cors");
@@ -17,42 +18,8 @@ const handleError = (res, error, mensaje) => {
   });
 };
 
-router.get("/saludo", async (req, res) => {
-  try {
-    res.status(200).json({ Saludo: "Bienvenido a App-Facturas" });
-  } catch (error) {
-    handleError(res, error, "Error");
-  }
-});
-
-// Obtener todas las facturas
-router.get('/facturas', async (req, res) => {
-  try {
-    const query = "SELECT * FROM facturas";
-    conexionMysql.query(query, (error, results) => {
-      if (error) {
-        handleError(res, error, "Error al obtener las facturas");
-      } else {
-        res.status(200).json({
-          "resultado": results,
-        });
-      }
-    });
-  } catch (error) {
-    handleError(res, error, "Error al obtener las facturas");
-  }
-});
-    
- 
-// Obtener una factura por su ID
-router.get('/facturas/:id', (req, res) => {
-    const invoiceId = req.params.id;
-    // Lógica para obtener una factura por su ID de la base de datos
-    res.send(`Obtener factura con ID ${invoiceId}`);
-});
-
 // Crear una nueva factura
-router.post('/facturas',  async (req, res) => {
+router.post('/',  async (req, res) => {
   try {
     const factura = req.body;
     const query = "INSERT INTO facturas VALUES (default,?,?,?,?,?,?,?,?)";
@@ -70,15 +37,42 @@ router.post('/facturas',  async (req, res) => {
     handleError(res, error, "Error al insertar la factura");
   }
 });
-    res.send('Crear una nueva factura');
 
+//leer las facturas
 
+router.get("/saludo", async (req, res) => {
+  try {
+    res.status(200).json({ Saludo: "Bienvenido a App-Facturas" });
+  } catch (error) {
+    handleError(res, error, "Error");
+  }
+});
+
+// Obtener todas las facturas
+router.get('/leer', async (req, res) => {
+  try {
+    const query = "SELECT * FROM facturas";
+    conexionMysql.query(query, (error, results) => {
+      if (error) {
+        handleError(res, error, "Error al obtener las facturas");
+      } else {
+        res.status(200).json({
+          "resultado": results,
+        });
+      }
+    });
+  } catch (error) {
+    handleError(res, error, "Error al obtener las facturas");
+  }
+});
+    
+ 
 // Eliminar una factura existente
-router.delete('/facturas/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const facturaId = req.params.id;
     const query = "DELETE FROM facturas WHERE id = ?";
-    conexionMysql.query(query, [facturaId], (error, results) => {
+    conexionMysql.query(uery, [facturaId], (error, results) => {
       if (error) {
         handleError(res, error, "Error al borrar la factura");
       } else {
@@ -93,12 +87,11 @@ router.delete('/facturas/:id', async (req, res) => {
 
 
 // Actualizar una factura existente
-router.put('/facturas/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   const facturaId = req.params.id;
   const facturaActualizar = req.body;
-
-  try {
-    const query = "UPDATE facturas SET Servicio=?, Cantidad=?, Precio=?, Impuesto=?, Fecha_factura=?, Referencia_pago=?, Fecha_vencimiento=?, Total=? WHERE id=?";
+  const query = "UPDATE facturas SET Servicio=?, Cantidad=?, Precio=?, Impuesto=?, Fecha_factura=?, Referencia_pago=?, Fecha_vencimiento=?, Total=? WHERE id=?";
+    
     conexionMysql.query(query, [
         facturaActualizar.Servicio,
         facturaActualizar.Cantidad,
@@ -108,20 +101,23 @@ router.put('/facturas/:id', (req, res) => {
         facturaActualizar.Referencia_pago,
         facturaActualizar.Fecha_vencimiento,
         facturaActualizar.Total,
-        facturaId
-    ], (error, result) => {
+        facturaId], 
+        (error, result) => {
         if (error) {
             handleError(res, error, "Error al actualizar la factura");
+            console.error('Error al actualizar la factura:', error);
+            return res.status(500).json({ error: "Error al actualizar la factura" });
         } else {
-            res.status(200).json({
-                mensaje: `Factura con ID ${facturaId} actualizada correctamente`
-            });
+          if (result.affectedRows === 0) {
+            return res.status(404).json({ error: `Factura con ID ${facturaId} no encontrada` });
         }
+        res.status(200).json({
+            mensaje: `Factura con ID ${facturaId} actualizada correctamente`
+        });
+      } 
     });
-} catch (error) {
-    handleError(res, error, "Error al actualizar la factura");
-}
-});
+  });
+
 
 
 module.exports = router;

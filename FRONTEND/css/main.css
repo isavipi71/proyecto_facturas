@@ -31,7 +31,7 @@ body {
     display: flex;
 }
 #seccion_izquierda{
-    width: 30%;
+    width: 15%;
     background-color: rgb(2, 83, 115);
 }
 
@@ -60,9 +60,14 @@ a:hover {
 }
 
 #seccion_derecha {
-    width: 70%;
+    width: 85%;
+    min-height: 600px;
     background-color: rgb(196, 221, 242);
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2)
+}
+
+iframe{
+    width: 100%;
 }
 
 /* Estilo para los botones */
@@ -71,10 +76,10 @@ button {
     padding: 20px;
     color: white;
     border: none;
+    border-radius: 10px;
+    box-shadow:10px 10px 10px rgba(0, 0, 0, 0.2) ;
     cursor: pointer;
-    /* Cambiamos el cursor al pasar sobre el botón */
-    transition: background-color 0.3s;
-    /* Agregamos una transición suave al color de fondo */
+    transition: background-color 0.3s;   
 }
 
 /* Estilo para los botones al pasar el mouse */

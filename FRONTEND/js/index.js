@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 document.addEventListener('DOMContentLoaded', function () {
   // Obtener referencia al enlace de Facturas
   const facturasLink = document.getElementById('facturas');
@@ -56,3 +57,25 @@ function mostrarFormularioFactura() {
 
 // Cuando el DOM esté cargado, cargar y mostrar los botones de factura
 document.addEventListener('DOMContentLoaded', cargarYMostrarBotonesFactura);
+=======
+//  document.addEventListener('DOMContentLoaded', function() {
+//   const enlaceFacturas = document.getElementById('facturas'); 
+//   const btnAgregarFactura = document.getElementById('agregar_factura');
+//   const btnCabecera = document.querySelector('.btn-cabecera');
+//   const contenedorFacturasCreadas = document.getElementById('contenedorFacturasCreadas');
+//   const formFactura = document.getElementById('formFactura');
+        
+//   enlaceFacturas.addEventListener('click', function() {
+//     // Mostrar botones de facturas y ocultar otros
+//     btnCabecera.classList.remove('hide');
+//     formFactura.classList.add('hide');
+//   });
+  
+// btnAgregarFactura.addEventListener('click', function() {
+// // Mostrar formulario y ocultar contenedor de facturas creadas
+//   btnCabecera.classList.add('hide');
+//   formFactura.classList.remove('hide');
+//   });
+//  });
+        
+>>>>>>> 4a37cf8 (commit)
