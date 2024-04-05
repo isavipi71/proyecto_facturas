@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="./css/servicios.css">
+    <script src="./js/servicios.js" defer></script>
+
+    <title>Servicios</title>
+</head>
+<body>
+	<div id="servicios">
+
+  	<div class="informacion">
+			
+			<div class="imagen">
+			<img src="./img/limpieza.jpg" alt="Imagen del servicio">
+    </div>
+
+			<div class="contenido_nombre_servicio">
+				<i class="fa-regular fa-star">
+			<label for="servicio">Nombre del Servicio</label></i>
+      <input type="text" name="servicio" id="servicio">
+			</div>
+
+    <div class="tipo">  
+      <input type="checkbox" name="tipo" id="tipo1">
+			<label for="tipo1">Consumible</label> 
+			<input type="checkbox" name="tipo" id="tipo2">
+      <label for="tipo2">Servicio</label>
+    </div>
+
+		<div class="precio">
+        <label for="precio">Precio</label>
+        <input type="number" name="precio" id="precio">
+		</div>
+
+		<div class="acordeon">
+			<input type="checkbox" id="acordeon-toggle" class="acordeon-toggle">
+			<label for="acordeon-toggle" class="acordeon-btn">Descripción <span>+</span></label>
+				<div class="acordeon-contenido">
+				<textarea placeholder="Escribe más información aquí..."></textarea>
+				</div>
+		</div>
+
+		<div class="acordeon">
+			<input type="checkbox" id="acordeon-toggle2" class="acordeon-toggle">
+			<label for="acordeon-toggle2" class="acordeon-btn">Información Adicional <span>+</span></label>
+			<div class="acordeon-contenido info-adicional">
+				<textarea placeholder="Escribe más información aquí..."></textarea>
+		</div>
+		</div>
+
+		<button type="button" id="btn-agregar_servicio"> Agregar</button>
+		<div class="contenedor_guardar-deshacer">
+		<i class="fa-solid fa-cloud-arrow-up"></i>
+    <i class="fa-solid fa-arrow-rotate-left"></i>
+	</div>         
+  </div>
+	</div>
+
+	<div class="servicios_creados"></div>
+
+</body>
+</html>
+
+
