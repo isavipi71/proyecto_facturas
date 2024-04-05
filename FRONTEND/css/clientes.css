@@ -20,7 +20,7 @@ body {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden; /*oculta el desbordamiento del co nte nido*/
+    overflow: hidden; /*oculta el desbordamiento del contenido*/
 }
 
 .imagen {
