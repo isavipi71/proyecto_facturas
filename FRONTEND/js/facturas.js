@@ -1,238 +1,3 @@
-function toggleMenu() {
-    var seccionIzquierda = document.getElementById("seccion_izquierda");
-    if (seccionIzquierda.style.display === "none") {
-        seccionIzquierda.style.display = "flex";
-    } else {
-        seccionIzquierda.style.display = "none";
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-// Obtener referencia al enlace de Facturas
-    const facturasLink = document.getElementById('facturas');
-
-    //  evento de clic al enlace de Facturas
-    facturasLink.addEventListener('click', function (event) {
-        event.preventDefault(); 
-        cargarYMostrarBotonesFactura(); // Mostrar los botones de añadir factura y ver facturas creadas
-    });
-});
-
-// Función para cargar el contenido de facturas.html y mostrar los botones
-function cargarYMostrarBotonesFactura() {
-    fetch('facturas.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('seccion_derecha').innerHTML = data;
-            cargarFacturasEventListeners(); // Agregar event listeners para los botones de facturas
-        });
-}
-// Event listeners de facturas
-function cargarFacturasEventListeners() {
-    // Evento de clic al botón "Crear Factura" para mostrar el formulario de creación de factura
-    document.getElementById('crear_factura').addEventListener('click', function (event) {
-        event.preventDefault();
-        mostrarFormularioFactura();
-    });
-
-    // Evento de clic al botón "Ver Facturas" para mostrar las facturas creadas
-    document.getElementById('ver_facturas').addEventListener('click', function (event) {
-        event.preventDefault();
-        mostrarFacturas();
-    });
-}
-
-// Función para mostrar los botones de factura
-function mostrarBotonesFactura() {
-     const seccionDerecha = document.getElementById("seccion_derecha");
-    seccionDerecha.innerHTML = "";
-    
-    const facturasButtonsDiv = document.createElement('div');
-    facturasButtonsDiv.id = 'facturas-buttons';
-
-const botonGuardarFactura = document.querySelector("#GuardarFactura");
-const mensajes = document.querySelector("#mensajes");
-//crear una factura
-botonGuardarFactura.addEventListener("click", () => {
-    const idCliente = document.querySelector("#cliente").value;
-    const idFactura = document.querySelector("#id").value;
-    const direccion = document.querySelector("#direccion").value;
-    const fecha = document.querySelector("#fecha").value;
-    const referenciaPago = document.querySelector("#referencia").value;
-    const fechaVencimiento = document.querySelector("#fecha_vencimiento").value;
-    const servicio = document.querySelector("#servicio").value;
-    const cantidad = document.querySelector("#cantidad").value;
-    const precio = document.querySelector("#precio").value;
-    const impuesto = document.querySelector("#impuesto").value;
-    const total = document.querySelector("#total").value;
-    // Enviar datos al servidor
-    const url = "http://localhost:4000/api/v1/facturas";
-    fetch(url, {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            idCliente: idCliente,
-            idFactura: idFactura,
-            direccion: direccion,
-            fecha: fecha,
-            referenciaPago: referenciaPago,
-            fechaVencimiento: fechaVencimiento,
-            servicio: servicio,
-            cantidad: cantidad,
-            precio: precio,
-            impuesto: impuesto,
-            total: total
-        })
-    })
-    .then((res) => res.json())
-    .then((mensaje) => {
-        mensajes.innerHTML = "Factura creada correctamente.";
-        setTimeout(() => {
-            location.reload(); // Refresca la página después de 3 segundos
-        }, 3000);
-    })
-    .catch((error) => {
-        mensajes.innerHTML = "Error al crear la factura: " + error;
-    });
-});
-
-//obtener las facturas
-
-function obtenerTodasLasFacturas() {
-    fetch('http://localhost:4000/api/v1/facturas')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Error al obtener las facturas');
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log('Facturas obtenidas:', data);
-        // Aquí puedes realizar acciones adicionales con los datos de las facturas, si es necesario
-      })
-      .catch(error => {
-        console.error('Error al obtener las facturas:', error);
-      });
-  }
-
-
-        // Botón de ver facturas creadas
-    const verFacturasBtn = document.createElement('button');
-    verFacturasBtn.id = 'ver-facturas-btn';
-    verFacturasBtn.textContent = 'Facturas';
-    facturasButtonsDiv.appendChild(verFacturasBtn);
-
-        // Agregar los botones al DOM
-    seccionDerecha.appendChild(facturasButtonsDiv);
-    // event listeners a los botones
-    cargarFacturasEventListeners();
-    }
-
-obtenerTodasLasFacturas();
-  
-// Actualizar una factura
-function actualizarFactura(id, datosActualizados) {
-    fetch(`http://localhost:4000/api/v1/facturas/${id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(datosActualizados)
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Error al actualizar la factura');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Factura actualizada:', data);
-        // Aquí puedes realizar acciones adicionales después de la actualización, si es necesario
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-}
-
-
-// Borrar una factura
-function borrarFactura(id) {
-    fetch(`http://localhost:4000/api/v1/facturas/${id}`, {
-        method: 'DELETE'
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Error al borrar la factura');}
-        });
-
-    }
-
-// Funcion para guardar la factura
-
-
-function guardarFactura() {
-    console.log("Guardar factura");
-
-    const id = document.getElementById('id').value;
-    const cliente = document.getElementById('cliente').value;
-   
-}
-
-// Función para ver las facturas existentes
-function verFacturas() {
-   
-console.log("Mostrar facturas existentes");
-
-}
-
-// Cuando el DOM esté cargado, mostrar los botones de factura
-//document.addEventListener('DOMContentLoaded', mostrarBotonesFactura);
-
-// Event listeners de facturas
-  
-//  document.addEventListener('DOMContentLoaded', function() {
-//      // Obtener referencia al botón "Añadir Factura"
-//     const agregarFacturaBtn = document.getElementById('agregar-factura-btn');
-//         if (agregarFacturaBtn) {
-//             agregarFacturaBtn.addEventListener('click', mostrarFormularioFactura);
-//         } else {
-//             console.error('No se encontró el botón "Añadir Factura" en el DOM.');
-//         }
-// // Obtener referencia al botón "Guardar"
-// const guardarBtn = document.getElementById('agregar_factura');
-// if (guardarBtn) {
-//     guardarBtn.addEventListener('click', guardarFactura);
-// } else {
-//     console.error('No se encontró el botón "Guardar" en el DOM.');
-// }
-
-//  // Obtener referencia al botón "Ver Facturas"
-//         const verFacturasBtn = document.getElementById('ver-facturas-btn');
-//         if (verFacturasBtn) {
-//             verFacturasBtn.addEventListener('click', verFacturas);
-//         } else {
-//             console.error('No se encontró el botón "Ver Facturas" en el DOM.');
-//         }
-//     });  
-
-//         console.log('Factura borrada correctamente');
-//         // Aquí puedes realizar acciones adicionales después de borrar la factura, si es necesario
-//     })
-//     .catch(error => {
-//         console.error('Error:', error);
-//     });
-// }
-
-
-
-
-
-// Agregar eventos de entrada para calcular el total automáticamente
-cantidadInput.addEventListener('input', calcularTotal);
-precioInput.addEventListener('input', calcularTotal);
-impuestoInput.addEventListener('input', calcularTotal);
-
-
 const botonGuardarFactura = document.querySelector("#GuardarFactura");
 const mensajes = document.querySelector("#mensajes");
 //crear una factura
@@ -270,6 +35,9 @@ botonGuardarFactura.addEventListener("click", () => {
     .then((res) => res.json())
     .then((mensaje) => {
         mensajes.innerHTML = "Factura creada correctamente.";
+        const contenedorFacturasCreadas= document.getElementById("contenedorFacturasCreadas");
+        contenedorFacturasCreadas.innerHTML =
+
         setTimeout(() => {
             location.reload(); // Refresca la página después de 3 segundos
         }, 3000);
@@ -278,25 +46,145 @@ botonGuardarFactura.addEventListener("click", () => {
         mensajes.innerHTML = "Error al crear la factura: " + error;
     });
  });
+
+
+//obtener las facturas
+  
+function obtenerTodasLasFacturas() {
+    fetch('http://localhost:4000/api/v1/facturas')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error al obtener las facturas');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Facturas obtenidas:', data);
+        // Aquí puedes realizar acciones adicionales con los datos de las facturas, si es necesario
+      })
+      .catch(error => {
+        console.error('Error al obtener las facturas:', error);
+      });
+  }
+
+
  
-// Obtener los elementos del formulario
-const cantidadInput = document.getElementById('cantidad');
-const precioInput = document.getElementById('precio');
-const impuestoInput = document.getElementById('impuesto');
-const totalInput = document.getElementById('total');
-
-// Calcular el total
-function calcularTotal() {
-  const cantidad = parseFloat(cantidadInput.value) || 0;
-  const precio = parseFloat(precioInput.value) || 0;
-  const impuesto = parseFloat(impuestoInput.value) || 0;
-
-  const total = (cantidad * precio) + impuesto;
-  totalInput.value = total.toFixed(2); // Redondear a 2 decimales
+// Actualizar una factura
+function actualizarFactura(id, datosActualizados) {
+    fetch(`http://localhost:4000/api/v1/facturas/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datosActualizados)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error al actualizar la factura');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Factura actualizada:', data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
 
 
-        
+// Borrar una factura
+function borrarFactura(id) {
+    fetch(`http://localhost:4000/api/v1/facturas/${id}`, {
+        method: 'DELETE'
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error al borrar la factura');}
+        });
+
+    }
+//FUNCIONES PARA MOSTRAR LOS BOTONES, FORM, Y DIV PARA FACTURAS GUARDADAS EN EL INDEX.HTML
+function mostrarBtnFactura () { //MUESTRA LOS BOTONES EN LA CABECERA EN EL LADO DERECHO DEL INDEX.HTML
+ const btnCabecera = document.getElementById("btn-cabecera");
+ btnCabecera.innerHTML = `
+ <button type="button" id="agregar_factura" onclick="mostrarForm()"> Nuevo</button>
+ <button type="button" id="ver-facturas">Facturas</button>
+ <button type="button" id="eliminarFactura"><i class="fa-solid fa-trash-can"></i></button>
+ <button type="button" id="editarFactura"> <i class="fa-regular fa-square-pen"></i></button>
+ <button type="button" id="importar"> <i class="fa-solid fa-gear"></i></button>
+` 
+}
+
+function mostrarForm(){// MUESTRA EL FORMULARIO CUANDO SE HACE CLICK EN NUEVO
+    const formFactura = document.getElementById("formFactura");
+    formFactura.innerHTML = ` 
+    <form>
+      <label class="form-label" for="id">Factura Número:</label>
+      <input class="form-control" type="text" id="id">
+     
+      <label class="form-label" for="cliente">Cliente:</label>
+      <select class="form-select form-select-lg mb-3" id="cliente" name="cliente">
+        <option selected > Click y selecciona el cliente</option>
+      </select>
+    
+
+      <label class="form-label" for="direccion">Direccion:</label>
+      <input class="form-control" type="text"  id="direccion">
+<!-- //seccion derecha  -->
+      <label class="form-label" for="fecha">Factura Fecha:</label>
+      <input class="form-control" type="date" id="fecha" required>
+
+      <label class="form-label"   for="referencia">Referencia de Pago:</label>
+      <input class="form-control" type="text" id="referencia">
+
+      <label class="form-label" for="fecha_vencimiento">Fecha de vencimiento:</label>
+      <input class="form-control" type="date" id="fecha_vencimiento"  required>
+<!-- //seccion abajo  -->
+      <label class="form-label" for="servicio">Servicio:</label>
+      <input class="form-control" type="text" id="servicio"  required>
+    
+      <label class="form-label" for="cantidad">Cantidad:</label>
+      <input class="form-control" type="number" id="cantidad" required>
+      
+      <label class="form-label" for="precio">Precio:</label>
+      <input class="form-control" type="number" id="precio" required>
+
+      <label class="form-label" for="impuesto">Impuesto:</label>
+      <input class="form-control" type="number" id="impuesto">
+
+      <label class="form-label" for="total">Total:</label>
+      <input class="form-control" type="number" id="total">
+
+      <div class="botones_guardarFactura">
+        <button type="button" id="GuardarFactura">
+          <i class="fa-solid fa-cloud-arrow-up"></i> Guardar
+      </button>
+        <i class="fa-solid fa-arrow-rotate-left"></i>
+        </div>
+
+      <div id="mensajes"></div>
+    </form>
+`
+}
+
+// CUANDO SE HACE CLICK EN EL BOTON DE GUARDAR SE GUARDA LA FACTURA EN EL CONTENEDOR
+// function mostrarBtnFactura () {
+//  const seccionDerecha = document.getElementById("seccion_derecha");
+//  seccionDerecha.innerHTML = `<div class="btn-cabecera" >
+//  <button type="button" id="agregar_factura" onclick="mostrarForm()"> Nuevo</button>
+//  <button type="button" id="ver-facturas">Facturas</button>
+//  <button type="button" id="eliminarFactura"><i class="fa-solid fa-trash-can"></i></button>
+//  <button type="button" id="editarFactura"> <i class="fa-regular fa-square-pen"></i></button>
+//  <button type="button" id="importar"> <i class="fa-solid fa-gear"></i></button>
+// </div>` 
+
+// }
+
+// FUNCION CUANDO SE HACE CLICK EN VER FACTURAS, MUESTRA EL DIV CONTENEDOR DE LAS FACTURAS
+
+
+// CLICK EN EL BOTON DE ELIMINAR , TIENE QUE ELIMINAR UNA FACTURA
 
 
 

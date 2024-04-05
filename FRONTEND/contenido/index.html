@@ -12,7 +12,8 @@
     <!-- CSS personalizado -->
     <link rel="stylesheet" href="../css/main.css">
     <!-- JS -->
-    <script src="./js/index.js" defer></script>
+    <script src="../js/index.js" defer></script>
+    <script src="../js/facturas.js" defer></script> 
 
     <title>Archivo General</title>
 </head>
@@ -27,7 +28,7 @@
       
       <div class="contenedor_menu">
         <img src="./img/factura.png" class="img-fluid mr-2"  alt="facturas">
-        <a href="facturas.html" id="facturas" class="align-middle"> Facturas</a>
+        <a href="#" id="facturas"  onclick="mostrarBtnFactura()" class="align-middle"> Facturas</a>
       </div>
 
       <div class="contenedor_menu">
@@ -56,7 +57,17 @@
       </div>
     </div>
     
-    <div id="seccion_derecha"> </div>
+    <div id="seccion_derecha">
+
+      <div id="btn-cabecera" > </div>
+
+      <div id="formFactura"> </div>
+      
+      <div id="contenedorFacturasCreadas" class="hide">
+        <!-- facturas creadas ya confirmadas -->
+      </div>
+
+    </div>
   
   </div>
 

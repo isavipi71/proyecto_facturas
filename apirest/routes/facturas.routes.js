@@ -105,7 +105,7 @@ router.put('/:id', (req, res) => {
         (error, result) => {
         if (error) {
             handleError(res, error, "Error al actualizar la factura");
-            console.error('Error al actualizar la factura:', error);
+           
             return res.status(500).json({ error: "Error al actualizar la factura" });
         } else {
           if (result.affectedRows === 0) {
