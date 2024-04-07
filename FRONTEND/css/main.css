@@ -4,12 +4,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Tenor Sans", sans-serif;
 }
 
-body {
-    font-family: "Tenor Sans", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+body{
+    min-height: 100vh;
 }
 
 .menu-hamburguesa {
@@ -84,6 +83,15 @@ button:hover {
     color: black;
     font-weight: 800;
 }
+
+input, select{ 
+    padding: 10px 10px;
+    border: 0;
+    font-size: 12px;
+    background-color: rgb(196, 221, 242);
+}
+
+
 
 
 

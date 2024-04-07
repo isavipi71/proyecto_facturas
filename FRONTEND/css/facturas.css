@@ -1,25 +1,150 @@
 /*formulario de facturas*/
-.btn-cabecera{
+/*botones de la cabecera*/
 
-    margin: 30px 20px;
-    padding: 50px;
+nav #btn-cabecera  {
+    display: flex;
+    
 }
-.container {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow:10px 10px 10px rgba(0.3, 0.1, 0.1, 0.2) ;
-  }
 
-.botones_guardarFactura{
+nav #btn-cabecera button{  
+    flex: 1;
+    margin: 50px;
+}
+/*estilos del formulario */
+
+#formFactura form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    border: 3px solid black;
+    padding: 30px;
+    
+}
+/*estilos del encabezado del form */
+.encabezado {
+    width: 100%;
+    min-height: 200px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.datos_cliente, .datos_factura {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cliente, .direccion{
+    width: 100%;
+
+}
+
+.cliente > .form-label{
+    margin-right: 15px; 
+}
+.direccion > .form-label{
+    margin-right: 10px;
+    }
+.direccion>.form-control{
+    width: 100%;
+}
+
+/*estilos del encabezado, titulos de la factura */
+
+.detalleFactura{
+    width: 100%;
     display: flex;
     justify-content: space-around;
-    margin-top: 40px;
+    align-items: center;
+    border: 1px solid #000;
 }
 
-.form-label{
-    margin: 1em auto 1em;
+.contenedor-encabezado{
+    flex-grow: 1;
+    text-align: center;
+    padding: 5px;
+    border-right: 1px solid #000;
 }
+.contenedor-encabezado:last-child {
+    border-right: none; /* Elimina el borde derecho del último elemento */
+}
+
+.contenedor-encabezado span{
+    padding: 5px;
+    border: 1px solid rgb(170, 168, 168);  
+}
+
+/*estilos del boton para agregar una linea */
+
+.btn-agregarLinea{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+}
+.btn-agregarLinea span{
+    text-align: center;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.btn-agregarLinea span:hover{
+    cursor: pointer;
+    background-color: rgb(2, 83, 115);
+    box-shadow:10px 10px 10px rgba(0, 0, 0, 0.2) ;
+}
+
+/*estilos del cuerpo de la factura */
+
+.calculo{
+    flex-grow: 1;
+    width: 100%;
+}
+
+#nuevosCampos{
+    text-align: center;
+    margin-top: 10px;
+}
+.nuevaLinea{
+    width: 100%;
+    border: 1px solid #000;
+}
+.nuevaLinea > input{
+    flex-grow: 1;
+    text-align: center;  
+}
+
+.total{
+    padding: 30px;
+    border: 1px solid #000;
+    text-align: end;
+}
+.total > div{
+    padding: 10px;
+}
+
+span#impuesto{
+    padding: 10px;
+    border-bottom: 2px solid black;
+}
+
+
+
+/*estilos de los botones guardar, eliminar o volver de la factura */
+
+.botones_guardarFactura button{
+   margin-top: 20px;
+}
+
+
+/*estilos del contenedor para ver  la factura */
 
 #contenedorFacturasCreadas {
     background-color: #fff;
@@ -29,6 +154,7 @@
     border-radius: 5px;
     margin-top: 50px;
 }
+
 .hide{
     display: none;
 }

@@ -1,36 +1,13 @@
-function toggleMenu() {
-  var seccionIzquierda = document.getElementById("seccion_izquierda");
-  if (seccionIzquierda.style.display === "none") {
-      seccionIzquierda.style.display = "flex";
-  } else {
-      seccionIzquierda.style.display = "none";
-  }
-}
-
-document.addeventlistener('domcontentloaded', function() {
-  const enlacefacturas = document.getelementbyid('facturas'); 
-  const btnagregarfactura = document.getelementbyid('agregar_factura');
-  const btncabecera = document.queryselector('.btn-cabecera');
-  const contenedorFacturasCreadas = document.getelementbyid('contenedorFacturasCreadas');
-  const formfactura = document.getelementbyid('formfactura');
+document.addEventListener('DOMContentLoaded', function() {
+  const enlacefacturas = document.getElementById('facturas'); 
+  const btnagregarfactura = document.getElementById('agregar_factura');
+  const btncabecera = document.querySelector('.btn-cabecera'); // Cambiado a querySelector
+  const formfactura = document.getElementById('formFactura'); // Cambiado a formFactura
   
-  enlacefacturas.addeventlistener('click', function() {
+  enlacefacturas.addEventListener('click', function() { // Cambiado a addEventListener
     // mostrar botones de facturas y ocultar otros
-    btncabecera.classlist.remove('hide');
-    formfactura.classlist.add('hide');
+    btncabecera.classList.remove('hide'); // Cambiado a classList.remove
+    formfactura.classList.add('hide'); // Cambiado a classList.add
   });
-  
-  btnagregarfactura.addeventlistener('click', function() {
-// mostrar formulario y ocultar contenedor de facturas creadas 
-
-    formfactura.classlist.remove('hide');
 });
- });
- 
 
- 
-
-
- 
-  
-  

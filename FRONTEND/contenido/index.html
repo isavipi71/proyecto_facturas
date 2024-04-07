@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- CSS personalizado -->
     <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/facturas.css">
     <!-- JS -->
     <script src="../js/index.js" defer></script>
     <script src="../js/facturas.js" defer></script> 
@@ -21,13 +22,14 @@
 <body>
 
   <div class="contenedor-secciones">
+    
     <div id="seccion_izquierda">
       <div class="menu-hamburguesa" onclick="toggleMenu()">
         <i class="fas fa-bars"></i>
       </div>
       
       <div class="contenedor_menu">
-        <img src="./img/factura.png" class="img-fluid mr-2"  alt="facturas">
+        <img src="../img/factura.png" class="img-fluid mr-2"  alt="facturas">
         <a href="#" id="facturas"  onclick="mostrarBtnFactura()" class="align-middle"> Facturas</a>
       </div>
 
@@ -55,21 +57,47 @@
         <img  src="../img/tareas.png" class="img-fluid mr-2" alt="">
         <a href="#tareas" class="align-middle">Tareas</a>
       </div>
+
+      <div class="bottom-content">
+  <li>
+    <a href="#">
+      <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      <span class="log-out"></span>
+    </a>
+  </li>
+  <li class="modo">
+    <div class="dia-noche">
+      <i class="fa-solid fa-moon"></i>
+      <i class="fa-solid fa-sun"></i>
+    </div>
+    <span class="modo_oscuro">Modo Noche</span>
+    <div class="toggle-switch">
+      <span class="switch"></span>
+    </div>
+  </li>
+      </div>
+
     </div>
     
     <div id="seccion_derecha">
-
-      <div id="btn-cabecera" > </div>
-
-      <div id="formFactura"> </div>
+    
+    <nav>
+      <div id="btn-cabecera"> </div>
+    </nav>
+  
+    <main>
       
-      <div id="contenedorFacturasCreadas" class="hide">
+      <div id="formFactura">  </div>
+          
+      <div id="contenedorFacturasCreadas" class="hide"></div>
         <!-- facturas creadas ya confirmadas -->
-      </div>
+    </main>
 
     </div>
   
   </div>
+
+  
 
 </body>
 </html>
