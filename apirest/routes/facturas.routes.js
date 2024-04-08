@@ -22,8 +22,8 @@ const handleError = (res, error, mensaje) => {
 router.post('/',  async (req, res) => {
   try {
     const factura = req.body;
-    const query = "INSERT INTO facturas VALUES (default,?,?,?,?,?,?,?,?)";
-    conexionMysql.query(query, [factura.Servicio, factura.Cantidad, factura.Precio, factura.Impuesto, factura.Fecha_factura, factura.Referencia_pago, factura.Fecha_vencimiento, factura.Total], (error, result) => {
+    const query = "INSERT INTO facturas VALUES (default, ?, ?,?,?,?,?,?,?,?)";
+    conexionMysql.query(query, [factura.clientes_id, factura.Fecha_factura, factura.Referencia_pago, factura.Fecha_vencimiento, factura.Servicio, factura.Cantidad, factura.Precio, factura.Impuesto,  factura.Total], (error, result) => {
       if (error) {
         handleError(res, error, "Error al insertar la factura");
       } else {

@@ -14,8 +14,6 @@ function mostrarBtnFactura () { //MUESTRA LOS BOTONES EN LA CABECERA EN EL LADO 
 document.addEventListener('DOMContentLoaded', function() {
   //click para mostar el formulario
 document.getElementById('agregar_factura').addEventListener('click', mostrarForm);
-//click para guardar la factura
-document.getElementById('GuardarFactura').addEventListener('click', guardarFactura);
 });
 
 
@@ -25,17 +23,17 @@ function mostrarForm(){// MUESTRA EL FORMULARIO CUANDO SE HACE CLICK EN NUEVO
     
     <form>
     <div class="factura-columna">
-        <label class="form-label" for="id">Factura Número:</label>
-        <input class="form-control" type="text" id="id">
-        </div>
+      <label class="form-label" for="idFactura"></label>
+      <input class="form-control" type="number"id="idFactura">
+    </div>
 
     <div class="encabezado">
       <div class="datos_cliente">
-      <div class="cliente">
-        <label class="form-label" for="cliente">Cliente:</label>
-        <select class="form-select" id="cliente" name="cliente">
-          <option selected > Click y selecciona el cliente</option>
-        </select>
+        <div class="cliente">
+          <label class="form-label" for="cliente">Cliente:</label>
+          <select class="form-select" id="cliente" name="cliente">
+            <option selected > Click y selecciona el cliente</option>
+          </select>
       </div>
 
       <div class="direccion">
@@ -84,7 +82,7 @@ function mostrarForm(){// MUESTRA EL FORMULARIO CUANDO SE HACE CLICK EN NUEVO
         </div>
 
       <div class="botones_guardarFactura">
-        <button type="button" id="GuardarFactura">
+        <button type="button" id="GuardarFactura" onclick="guardarFactura()">
           <i class="fa-solid fa-cloud-arrow-up"></i> Guardar
         </button>
 
@@ -149,19 +147,23 @@ function calcularSubtotal() {
   document.getElementById('impuesto').textContent = impuesto.toFixed(2);
   document.getElementById('total').textContent = total.toFixed(2);
 }
-  
+
+
 
 // Función para guardar la factura en la base de datos
-function guardarFactura() {
-   const mensajes = document.querySelector("#mensajes");
+document.addEventListener('DOMContentLoaded', function() { 
+//click para guardar la factura
 
-   
-   const idFactura = document.querySelector("#id").value;
-   const idCliente = document.querySelector("#cliente").value;
-   const direccion = document.querySelector("#direccion").value;
-   const fecha = document.querySelector("#fecha").value;
-   const referenciaPago = document.querySelector("#referencia").value;
-   const fechaVencimiento = document.querySelector("#fecha_vencimiento").value;
+});
+
+
+function guardarFactura(){
+   const mensajes = document.querySelector("#mensajes");
+   const idCliente = document.querySelectorAll("#cliente").value;
+   const direccion = document.querySelectorAll("#direccion").value;
+   const fecha = document.querySelectorAll("#fecha").value;
+   const referenciaPago = document.getElementById("referencia").value;
+   const fechaVencimiento = document.querySelectorAll("#fecha_vencimiento").value;
    const servicio = document.querySelector("#servicio").value;
    const cantidad = document.querySelector("#cantidad").value;
    const precio = document.querySelector("#precio").value;
@@ -174,10 +176,10 @@ function guardarFactura() {
     referenciaPago.length === 0 ||
     fechaVencimiento.length === 0 ||
     servicio.length === 0 ||
-    cantidad.length === 0 ||
-    precio.length === 0 ||
-    impuesto.length === 0 ||
-    total.length === 0 
+    cantidad === "" ||
+    precio === "" ||
+    impuesto === ""||
+    total === ""
   ){
     mensajes.innerHTML = "Campos vacios ... <i class='fa-solid fa-ban fa-beat-fade'></i>";
     return;
@@ -188,16 +190,16 @@ function guardarFactura() {
        method: "post",
        headers: { "Content-Type": "application/json" },
        body: JSON.stringify({
-        
-           Servicio: servicio,
-           Cantidad: cantidad,
-           Precio: precio,
-           Impuesto: impuesto,
-           Fecha_factura: fecha,
-          Referencia_pago: referenciaPago,
-          Fecha_vencimiento: fechaVencimiento,
-          Total: total
-       
+        id:  idFactura,
+        clientes_id: idCliente,
+        Fecha_factura: fecha,
+        Referencia_pago: referenciaPago,
+        Fecha_vencimiento: fechaVencimiento,
+        Servicio: servicio,
+        Cantidad: cantidad,
+        Precio: precio,
+        Impuesto: impuesto,
+        Total: total
         })
     })
     .then((res) => res.json())
@@ -215,31 +217,32 @@ function guardarFactura() {
         mensajes.innerHTML = "Error al crear la factura: " + error;
     });
   }
+ 
+  
   
 // Evento click del botón Imprimir
-document.getElementById('imprimir').addEventListener('click', () => {
-  // Aquí puedes agregar el código para generar la factura en formato HTML
-  const facturaHTML = generarFacturaHTML(); // Esta función debería retornar el HTML de la factura
+// document.getElementById('imprimir').addEventListener('click', () => {
+//   // Aquí puedes agregar el código para generar la factura en formato HTML
+//   const facturaHTML = generarFacturaHTML(); // Esta función debería retornar el HTML de la factura
 
-  // Crear un objeto jsPDF
-  const pdf = new jsPDF();
+//   // Crear un objeto jsPDF
+//   const pdf = new jsPDF();
 
-  // Agregar el contenido HTML a la página del PDF
-  pdf.html(facturaHTML, {
-      callback: function (pdf) {
-          // Guardar o mostrar el PDF
-          pdf.save('factura.pdf'); // Guarda el PDF con el nombre 'factura.pdf'
-          // pdf.output('dataurlnewwindow'); // Abre una nueva ventana con el PDF
-      }
-  });
-});
-
-// Función para generar el HTML de la factura
-function generarFacturaHTML() {
-  // Aquí deberías generar el HTML de la factura utilizando los datos de la factura guardada en la interfaz
-  // Puedes recorrer los elementos de la factura y generar el HTML correspondiente
-  // Retorna el HTML generado
-}
+//   // Agregar el contenido HTML a la página del PDF
+//   pdf.html(facturaHTML, {
+//       callback: function (pdf) {
+//           // Guardar o mostrar el PDF
+//           pdf.save('factura.pdf'); // Guarda el PDF con el nombre 'factura.pdf'
+//           // pdf.output('dataurlnewwindow'); // Abre una nueva ventana con el PDF
+//       }
+//   });
+// });
+// // Función para generar el HTML de la factura
+// function generarFacturaHTML() {
+//   // Aquí deberías generar el HTML de la factura utilizando los datos de la factura guardada en la interfaz
+//   // Puedes recorrer los elementos de la factura y generar el HTML correspondiente
+//   // Retorna el HTML generado
+// }
 
 
 

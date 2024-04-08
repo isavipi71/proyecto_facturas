@@ -1,106 +1,103 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clientes</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="../css/clientes.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clientes</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/clientes.css">
 
 </head>
+
 <body>
-  
-    <div class="tarjeta">
 
-        <div class="imagen"> 
-          <i class="fa-solid fa-cloud-arrow-up"></i>
-          <i class="fa-solid fa-arrow-rotate-left"></i> 
-          <label for="file-input" class="upload-icon"> <i class="fa-solid fa-image"></i>  </label>
-          <input id="file-input"  type="file" accept="image/*">  
-        </div>
-                   
-        <div class="informacion">
-            <div class="tipo">
-                <input type="checkbox" id="cliente" name="tipo" value="cliente"> 
-                <label for="cliente">Cliente</label>
-          
-              <input type="checkbox" id="compania" name="tipo" value="compania">  
-              <label for="compania">Compañía</label>      
-            </div>
-        </div>
-                           
-        <div class="nombre">
-          
-          <label for="nombre">Nombre:</label> 
-          <input type="text" id="nombre" name="nombre">
-       
-        </div>
-                        
-        <div class="direccion">
-          <h3>Dirección:</h3>
-          <div class="provincia">
-            <label for="provincia">Provincia:</label>
-             <select id="provincia" name="provincia">
-              <option value="barcelona">Barcelona</option>
-              <option value="girona">Girona</option>
-              <option value="lleida">Lleida</option>
-              <option value="tarragona">Tarragona</option>
-             </select>  
-        </div>
-       
-        <div class="ciudad">
-          <label for="ciudad">Ciudad:</label>
-          <select id="ciudad" name="ciudad">
-            <option value="ciudad1">Ciudad 1</option>
-            <option value="ciudad2">Ciudad 2</option>  
-            <option value="ciudad3">Ciudad 3</option>  
-          </select>
-        </div>
-                             
-        <div class="codigo-postal">
-          <label for="codigo-postal">Código Postal:</label>
-          <input type="text" id="codigo-postal" name="codigo-postal">
-        </div>
-
-        <div class="pais">     
-          <label for="pais">País:</label>
-          <input type="text" id="pais" name="pais">
-        </div>
-        </div>
-                    
-        <div class="nif">
-           <label for="nif">NIF:</label>
-           <input type="text" id="nif" name="nif">
-        </div>
-        
-        <div class="contacto">
-          <div class="telefono">
-            <label for="telefono">Teléfono:</label>
-            <input type="tel" id="telefono" name="telefono">
-          </div>
-
-          <div class="movil">
-            <label for="movil">Móvil:</label>
-            <input type="tel" id="movil" name="movil">
-          </div>
-                        
-          <div class="correo-electronico"> 
-            <label for="correo-electronico">Correo Electrónico:</label>
-            <input type="email" id="correo-electronico" name="correo-electronico">
-          </div>
-        </div>          
-               
+  <div class="tarjeta">
+    <div class="botones">
+      <button type="button" id="agregar_cliente"> Nuevo Cliente</button>
+      <button type="button" id="ver-clientes">Clientes</button>
+      <button type="button" id="eliminarCliente"><i class="fa-solid fa-trash-can"></i></button>
+      <button type="button" id="editarcliente"> <i class="fa-regular fa-square-pen"></i></button>
     </div>
-                
+
+    <div class="informacion">
+
+      <div class="tipo">
+        <input type="checkbox" id="cliente" value="cliente">
+        <label for="cliente">Cliente</label>
+
+        <input type="checkbox" id="compania" value="compania">
+        <label for="compania">Compañía</label>
+      </div>
+    </div>
+
+    <div class="nombre">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre">
+    </div>
+
+    <div class="nif">
+      <label for="nif">NIF:</label>
+      <input type="text" id="nif">
+    </div>
+
+    <div class="direccion">
+      <h3>Dirección:</h3>
+      <div class="calle">
+        <label for="calle">Calle:</label>
+        <input type="text" id="calle">
+      </div>
+
+      <div class="provincia">
+        <label for="provincia">Provincia:</label>
+        <select id="provincia" name="provincia">
+          <option value="barcelona">Barcelona</option>
+          <option value="girona">Girona</option>
+          <option value="lleida">Lleida</option>
+          <option value="tarragona">Tarragona</option>
+        </select>
+      </div>
+
+      <div class="ciudad">
+        <label for="ciudad">Ciudad:</label>
+        <select id="ciudad" name="ciudad">
+          <option value="ciudad1">Ciudad 1</option>
+          <option value="ciudad2">Ciudad 2</option>
+          <option value="ciudad3">Ciudad 3</option>
+        </select>
+      </div>
+
+      <div class="codigo-postal">
+        <label for="codigo-postal">Código Postal:</label>
+        <input type="text" id="codigo-postal" name="codigo-postal">
+      </div>
+
+      <div class="pais">
+        <label for="pais">País:</label>
+        <input type="text" id="pais" name="pais">
+      </div>
+    </div>
+
+  
+    <div class="contacto">
+      <div class="telefono">
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono">
+      </div>
+
+      <div class="movil">
+        <label for="movil">Móvil:</label>
+        <input type="tel" id="movil">
+      </div>
+
+      <div class="correo-electronico">
+        <label for="correo-electronico">Correo Electrónico:</label>
+        <input type="email" id="correo-electronico">
+      </div>
+    </div>
+
+  </div>
+
 </body>
+
 </html>
-
-
-
-
-
-    
-
-    
- 
-

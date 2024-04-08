@@ -1,53 +1,61 @@
-document.addEventListener('DOMContentLoaded', function () {
-  // Obtener referencia al enlace de Facturas
-  const link = document.getElementById("mostrarFacturas");
-  //  evento de clic al enlace de Facturas
-  link.addEventListener('click', function(event) {
-      event.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
-      mostrarBotonesFactura(); // Mostrar los botones de añadir factura y ver facturas creadas
-  });
-
-  // Función para mostrar los botones de factura
-  function mostrarBotonesFactura() {
-      const seccionDerecha = document.getElementById('seccion_derecha');
-    //   seccionDerecha.innerHTML = "";
-      if (!seccionDerecha.querySelector('#facturas-buttons')) {
-      const facturasButtonsDiv = document.createElement('div');
-      facturasButtonsDiv.id = 'facturas-buttons';
-
-      // Botón de añadir factura
-      const agregarFacturaBtn = document.createElement('button');
-      agregarFacturaBtn.id = 'agregar-factura-btn';
-      agregarFacturaBtn.textContent = 'Añadir Factura';
-      agregarFacturaBtn.addEventListener('click', mostrarFormularioFactura);
-      facturasButtonsDiv.appendChild(agregarFacturaBtn);
-
-      // Botón de ver facturas creadas
-      const verFacturasBtn = document.createElement('button');
-      verFacturasBtn.id = 'ver-facturas-btn';
-      verFacturasBtn.textContent = 'Facturas';
-      facturasButtonsDiv.appendChild(verFacturasBtn);
-
-      // Agregar los botones al DOM
-    //   seccionDerecha.insertBefore(facturasButtonsDiv, seccionDerecha.firstChild);
-    seccionDerecha.appendChild(facturasButtonsDiv);
-  }
-}
-
-  // Función para mostrar el formulario de agregar factura
-  function mostrarFormularioFactura() {
-      console.log("mostrar Formulario Factura");
-      console.log(document.getElementById("formulario-factura"));
-      const facturaForm = document.getElementById("formulario-factura");
-      if (facturaForm) {
-          facturaForm.style.display = 'block';  // Mostrar el formulario
-      } else {
-          console.error("El elemento formulario-factura no se encontró en el DOM.");
-      }
-  }
+document.addEventListener('DOMContentLoaded', function() { 
+  // Agregar evento de clic al botón "Guardar Cliente"
+  document.getElementById('agregar_cliente').addEventListener('click', guardarCliente);
 });
 
+function guardarCliente() {
+  const cliente = {
+      nombre: document.querySelector("#nombre").value,
+      nif: document.querySelector("#nif").value,
+      calle: document.querySelector("#calle").value,
+      provincia: document.querySelector("#provincia").value,
+      ciudad: document.querySelector("#ciudad").value,
+      codigoPostal: document.querySelector("#codigo-postal").value,
+      pais: document.querySelector("#pais").value,
+      telefono: document.querySelector("#telefono").value,
+      movil: document.querySelector("#movil").value,
+      correoElectronico: document.querySelector("#correo-electronico").value
+  };
+
+  fetch('http://localhost:4000/api/v1/clientes', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(cliente)
+  })
+  .then(response => response.json())
+  .then(data => {
+      console.log(data); // Aquí puedes manejar la respuesta del servidor
+      alert('Cliente guardado correctamente');
+  })
+  .catch(error => {
+      console.error('Error:', error);
+      alert('Ocurrió un error al guardar el cliente');
+  });
+}
 
 
 
 
+
+// function cargarClientes() {
+//   const url = "http://localhost:4000/api/v1/clientes"; // La ruta para obtener los clientes desde el servidor
+//   fetch(url)
+//     .then((res) => res.json())
+//     .then((data) => {
+//       const selectCliente = document.querySelector("#cliente");
+//       data.forEach((cliente) => {
+//         const option = document.createElement("option");
+//         option.value = cliente.Nombre;
+//         option.text = cliente.Nombre;
+//         selectCliente.appendChild(option);
+//       });
+//     })
+//     .catch((error) => {
+//       console.error("Error al cargar los clientes:", error);
+//     });
+// }
+
+// // Llamamos a la función para cargar los clientes 
+// window.onload = cargarClientes;

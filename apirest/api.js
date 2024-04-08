@@ -2,8 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const port = process.env.PORT || 4000; 
 const api = express();
-const fs = require('fs');
-const { jsPDF } = require('jspdf');
+// const fs = require('fs');
+// const { jsPDF } = require('jspdf');
 
 // Middleware
 api.use(cors());
