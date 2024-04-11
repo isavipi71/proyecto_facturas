@@ -61,11 +61,11 @@ function mostrarForm(){// MUESTRA EL FORMULARIO CUANDO SE HACE CLICK EN NUEVO
      </div>
      <!-- //cuerpo de la factura -->
       <div class="detalleFactura">
-        <span class="contenedor-encabezado"> Servicio</span>
-        <span class="contenedor-encabezado">Descripción</span>
-        <span class="contenedor-encabezado">Cantidad</span>
-        <span class="contenedor-encabezado">Precio</span>
-        <span class="contenedor-encabezado">IVA %</span>
+        <span class="contenedor-encabezado" > Servicio</span>
+        <span class="contenedor-encabezado" >Descripción</span>
+        <span class="contenedor-encabezado" >Cantidad</span>
+        <span class="contenedor-encabezado" >Precio</span>
+        <span class="contenedor-encabezado"id="total">IVA %</span>
         </div>
 
         <div class="btn-agregarLinea">
@@ -108,15 +108,76 @@ function agregarNuevaLinea() {
   nuevaLinea.classList.add('nuevaLinea');
 
   nuevaLinea.innerHTML = `
-      <input type="text" placeholder="Servicio">
-      <input type="text" placeholder="Descripción">
-      <input type="number" placeholder="Cantidad">
-      <input type="number" placeholder="Precio">
+      <input type="text" id="servicio" placeholder="Servicio">
+      <input type="text" id="descripcion" placeholder="Descripción">
+      <input type="number" id="cantidad" placeholder="Cantidad">
+      <input type="number" id="precio" placeholder="Precio">
       <input type="number" placeholder="Precio sin IVA %" onchange="calcularImporteTotal(this)">
   `;
   
   nuevosCampos.appendChild(nuevaLinea);
 }
+function guardarFactura(){
+  const mensajes = document.getElementById("mensajes");
+  const idCliente = document.getElementById("cliente").value;
+  const direccion = document.getElementById("direccion").value;
+  const fecha = document.getElementById("fecha").value;
+  const referenciaPago = document.getElementById("referencia").value;
+  const fechaVencimiento = document.getElementById("fecha_vencimiento").value;
+  const servicio = document.getElementById("servicio").value;
+  const cantidad = document.getElementById("cantidad").value;
+  const precio = document.getElementById("precio").value;
+  const impuesto = document.getElementById("impuesto").value;
+  const total = document.getElementById("total").value;
+  //comprobar que los campos no esten vacios
+  if(
+  
+   fecha.length === 0 || 
+   referenciaPago.length === 0 ||
+   fechaVencimiento.length === 0 ||
+   servicio.length === 0 ||
+   cantidad === "" ||
+   precio === "" ||
+   impuesto === ""||
+   total === ""
+ ){
+   mensajes.innerHTML = "Campos vacios ... <i class='fa-solid fa-ban fa-beat-fade'></i>";
+   return;
+  }
+  // Enviar datos al servidor
+  const url = "http://localhost:4000/api/v1/facturas";
+  fetch(url, {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+       id:  idFactura,
+       clientes_id: idCliente,
+       Fecha_factura: fecha,
+       Referencia_pago: referenciaPago,
+       Fecha_vencimiento: fechaVencimiento,
+       Servicio: servicio,
+       Cantidad: cantidad,
+       Precio: precio,
+       Impuesto: impuesto,
+       Total: total
+       })
+   })
+   .then((res) => res.json())
+   .then((mensaje) => {
+       mensajes.innerHTML = "Factura creada correctamente.";
+   
+       const contenedorFacturasCreadas= document.getElementById("contenedorFacturasCreadas");
+       contenedorFacturasCreadas.innerHTML = "";
+
+       setTimeout(() => {
+           location.reload(); // Refresca la página después de 3 segundos
+       }, 3000);
+   })
+   .catch((error) => {
+       mensajes.innerHTML = "Error al crear la factura: " + error;
+   });
+ }
+
  
   // Función para calcular el importe total de la línea
   function calcularImporteTotal(input) {
@@ -157,67 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-function guardarFactura(){
-   const mensajes = document.querySelector("#mensajes");
-   const idCliente = document.querySelectorAll("#cliente").value;
-   const direccion = document.querySelectorAll("#direccion").value;
-   const fecha = document.querySelectorAll("#fecha").value;
-   const referenciaPago = document.getElementById("referencia").value;
-   const fechaVencimiento = document.querySelectorAll("#fecha_vencimiento").value;
-   const servicio = document.querySelector("#servicio").value;
-   const cantidad = document.querySelector("#cantidad").value;
-   const precio = document.querySelector("#precio").value;
-   const impuesto = document.querySelector("#impuesto").value;
-   const total = document.querySelector("#total").value;
-   //comprobar que los camapos no esten vacios
-   if(
-    direccion.length === 0 ||
-    fecha.length === 0 ||
-    referenciaPago.length === 0 ||
-    fechaVencimiento.length === 0 ||
-    servicio.length === 0 ||
-    cantidad === "" ||
-    precio === "" ||
-    impuesto === ""||
-    total === ""
-  ){
-    mensajes.innerHTML = "Campos vacios ... <i class='fa-solid fa-ban fa-beat-fade'></i>";
-    return;
-   }
-   // Enviar datos al servidor
-   const url = "http://localhost:4000/api/v1/facturas";
-   fetch(url, {
-       method: "post",
-       headers: { "Content-Type": "application/json" },
-       body: JSON.stringify({
-        id:  idFactura,
-        clientes_id: idCliente,
-        Fecha_factura: fecha,
-        Referencia_pago: referenciaPago,
-        Fecha_vencimiento: fechaVencimiento,
-        Servicio: servicio,
-        Cantidad: cantidad,
-        Precio: precio,
-        Impuesto: impuesto,
-        Total: total
-        })
-    })
-    .then((res) => res.json())
-    .then((mensaje) => {
-        mensajes.innerHTML = "Factura creada correctamente.";
-    
-        const contenedorFacturasCreadas= document.getElementById("contenedorFacturasCreadas");
-        contenedorFacturasCreadas.innerHTML = "";
 
-        setTimeout(() => {
-            location.reload(); // Refresca la página después de 3 segundos
-        }, 3000);
-    })
-    .catch((error) => {
-        mensajes.innerHTML = "Error al crear la factura: " + error;
-    });
-  }
- 
   
   
 // Evento click del botón Imprimir

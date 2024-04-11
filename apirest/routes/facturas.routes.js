@@ -19,7 +19,7 @@ const handleError = (res, error, mensaje) => {
 };
 
 // Crear una nueva factura
-router.post('/',  async (req, res) => {
+router.post('/crear',  async (req, res) => {
   try {
     const factura = req.body;
     const query = "INSERT INTO facturas VALUES (default, ?, ?,?,?,?,?,?,?,?)";
