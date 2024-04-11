@@ -18,10 +18,35 @@ const handleError = (res, error, mensaje) => {
   });
 };
 
+const validarFactura = (factura) => {
+  return (
+    factura.clientes_id &&
+    factura.Fecha_factura &&
+    factura.Referencia_pago &&
+    factura.Fecha_vencimiento &&
+    factura.Servicio &&
+    factura.Cantidad &&
+    factura.Precio &&
+    factura.Impuesto &&
+    factura.Total
+  ); 
+    
+  };
+
 // Crear una nueva factura
 router.post('/crear',  async (req, res) => {
+  console.log(req.body);
   try {
     const factura = req.body;
+     // Validar los datos de la factura
+     if (!validarFactura(factura)) {
+      res.status(400).json({
+        status: 400,
+        message: "Datos de la factura inválidos",
+      });
+      return;
+    }
+
     const query = "INSERT INTO facturas VALUES (default, ?, ?,?,?,?,?,?,?,?)";
     conexionMysql.query(query, [factura.clientes_id, factura.Fecha_factura, factura.Referencia_pago, factura.Fecha_vencimiento, factura.Servicio, factura.Cantidad, factura.Precio, factura.Impuesto,  factura.Total], (error, result) => {
       if (error) {

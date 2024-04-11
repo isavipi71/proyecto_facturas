@@ -1,7 +1,7 @@
 
 //FUNCIONES PARA MOSTRAR LOS BOTONES, FORM, Y DIV PARA FACTURAS GUARDADAS EN EL INDEX.HTML
 function mostrarBtnFactura () { //MUESTRA LOS BOTONES EN LA CABECERA EN EL LADO DERECHO DEL INDEX.HTML
- const btnCabecera = document.getElementById("btn-cabecera");
+ const btnCabecera = document.getElementById("btn-cabecera"); //obtiene el div donde se encuentran los botones
  btnCabecera.innerHTML = `
  <button type="button" id="agregar_factura" onclick="mostrarForm()"> Nueva Factura</button>
  <button type="button" id="ver-facturas">Facturas</button>
@@ -23,56 +23,56 @@ function mostrarForm(){// MUESTRA EL FORMULARIO CUANDO SE HACE CLICK EN NUEVO
     
     <form>
     <div class="factura-columna">
-      <label class="form-label" for="idFactura"></label>
-      <input class="form-control" type="number"id="idFactura">
+      <label for="idFactura">Factura Número</label>
+      <input type="number"id="idFactura">
     </div>
 
     <div class="encabezado">
       <div class="datos_cliente">
         <div class="cliente">
-          <label class="form-label" for="cliente">Cliente:</label>
-          <select class="form-select" id="cliente" name="cliente">
+          <label  for="cliente">Cliente:</label>
+          <select  id="cliente" name="cliente">
             <option selected > Click y selecciona el cliente</option>
           </select>
       </div>
 
       <div class="direccion">
-        <label class="form-label" for="direccion">Direccion:</label>
-        <input class="form-control" type="text"  id="direccion">
+        <label  for="direccion">Direccion:</label>
+        <input  type="text"  id="direccion">
       </div>
       </div>
         <!-- //seccion derecha  -->
       <div class="datos_factura">
       <div class="fecha">
-        <label class="form-label" for="fecha">Factura Fecha:</label>
-        <input class="form-control" type="date" id="fecha" required>
+        <label for="fecha">Factura Fecha:</label>
+        <input type="date" id="fecha" required>
       </div>
 
       <div class="referencia">
-        <label class="form-label"   for="referencia">Referencia de Pago:</label>
-        <input class="form-control" type="text" id="referencia">
+        <label   for="referencia">Referencia de Pago:</label>
+        <input  type="text" id="referencia">
       </div>
 
       <div class="vencimiento">
-        <label class="form-label" for="fecha_vencimiento">Fecha de vencimiento:</label>
-        <input class="form-control" type="date" id="fecha_vencimiento"  required>
+        <label for="fecha_vencimiento">Fecha de vencimiento:</label>
+        <input type="date" id="fecha_vencimiento"  required>
      </div>
      </div>
      </div>
-     <!-- //cuerpo de la factura -->
+     <!-- cuerpo de la factura -->
       <div class="detalleFactura">
-        <span class="contenedor-encabezado" > Servicio</span>
+        <span class="contenedor-encabezado" >Servicio</span>
         <span class="contenedor-encabezado" >Descripción</span>
         <span class="contenedor-encabezado" >Cantidad</span>
         <span class="contenedor-encabezado" >Precio</span>
-        <span class="contenedor-encabezado"id="total">IVA %</span>
+        <span class="contenedor-encabezado">IVA %</span>
         </div>
 
-        <div class="btn-agregarLinea">
+        <div class="btn-agregarLinea"> <!-- crea el boton para agregar una linea -->
         <span id="agregarLinea"><i class="fa-solid fa-plus"></i> Agregar linea</span>
         </div>
 
-        <div class="calculo">
+        <div class="calculo">  <!--div para mostrar el calculo de la factura -->
         <div id="nuevosCampos"></div>
         <div class="total">
         <div>Base imponible : <span id="subtotal">0,00€</span></div>
@@ -81,8 +81,8 @@ function mostrarForm(){// MUESTRA EL FORMULARIO CUANDO SE HACE CLICK EN NUEVO
         </div>
         </div>
 
-      <div class="botones_guardarFactura">
-        <button type="button" id="GuardarFactura" onclick="guardarFactura()">
+      <div class="botones_guardarFactura"> <!-- div para los botones de guardar, imprimir y volver -->
+        <button type="button" id="GuardarFactura" onclick="guardarFacturaCliente()">
           <i class="fa-solid fa-cloud-arrow-up"></i> Guardar
         </button>
 
@@ -95,7 +95,7 @@ function mostrarForm(){// MUESTRA EL FORMULARIO CUANDO SE HACE CLICK EN NUEVO
         </button>   
       </div>
     </form>
-    <div id="mensajes"></div>
+    <div id="mensajes"></div> <!--div para manejar los mensajes de error -->
     `;
 // evento click al botón agregar línea
     document.getElementById('agregarLinea').addEventListener('click', agregarNuevaLinea);
@@ -112,15 +112,46 @@ function agregarNuevaLinea() {
       <input type="text" id="descripcion" placeholder="Descripción">
       <input type="number" id="cantidad" placeholder="Cantidad">
       <input type="number" id="precio" placeholder="Precio">
-      <input type="number" placeholder="Precio sin IVA %" onchange="calcularImporteTotal(this)">
+      <input type="number" id= "impuesto" placeholder="Precio sin IVA %" onchange="calcularImporteTotal(this)">
   `;
   
   nuevosCampos.appendChild(nuevaLinea);
 }
-function guardarFactura(){
-  const mensajes = document.getElementById("mensajes");
+// Obtener el contenedor de las facturas creadas
+const contenedorFacturasCreadas = document.getElementById("contenedorFacturasCreadas");
+
+// Función para mostrar las facturas en el contenedor
+function mostrarFacturas(facturas) {
+  // Limpiar el contenedor
+  contenedorFacturasCreadas.innerHTML = "";
+
+  // Recorrer las facturas y crear elementos para mostrarlas
+  facturas.forEach(factura => {
+    const facturaElement = document.createElement("div");
+    facturaElement.classList.add("factura");
+    facturaElement.innerHTML = `
+      <p>ID: ${factura.id}</p>
+      <p>Cliente: ${factura.cliente}</p>
+      <p>Fecha: ${factura.fecha}</p>
+      <p>Referencia de Pago: ${factura.referenciaPago}</p>
+      <p>Fecha de Vencimiento: ${factura.fechaVencimiento}</p>
+      <p>Servicio: ${factura.servicio}</p>
+      <p>Cantidad: ${factura.cantidad}</p>
+      <p>Precio: ${factura.precio}</p>
+      <p>Impuesto: ${factura.impuesto}</p>
+      <p>Total: ${factura.total}</p>
+    `;
+
+    // Agregar la factura al contenedor
+    contenedorFacturasCreadas.appendChild(facturaElement);
+  });
+}
+
+// Función para guardar la factura
+function guardarFacturaCliente() {
+  // Obtener los valores de los campos
+  const idFactura = document.getElementById("idFactura").value;
   const idCliente = document.getElementById("cliente").value;
-  const direccion = document.getElementById("direccion").value;
   const fecha = document.getElementById("fecha").value;
   const referenciaPago = document.getElementById("referencia").value;
   const fechaVencimiento = document.getElementById("fecha_vencimiento").value;
@@ -129,54 +160,96 @@ function guardarFactura(){
   const precio = document.getElementById("precio").value;
   const impuesto = document.getElementById("impuesto").value;
   const total = document.getElementById("total").value;
-  //comprobar que los campos no esten vacios
-  if(
-  
-   fecha.length === 0 || 
-   referenciaPago.length === 0 ||
-   fechaVencimiento.length === 0 ||
-   servicio.length === 0 ||
-   cantidad === "" ||
-   precio === "" ||
-   impuesto === ""||
-   total === ""
- ){
-   mensajes.innerHTML = "Campos vacios ... <i class='fa-solid fa-ban fa-beat-fade'></i>";
-   return;
-  }
-  // Enviar datos al servidor
-  const url = "http://localhost:4000/api/v1/facturas";
-  fetch(url, {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-       id:  idFactura,
-       clientes_id: idCliente,
-       Fecha_factura: fecha,
-       Referencia_pago: referenciaPago,
-       Fecha_vencimiento: fechaVencimiento,
-       Servicio: servicio,
-       Cantidad: cantidad,
-       Precio: precio,
-       Impuesto: impuesto,
-       Total: total
-       })
-   })
-   .then((res) => res.json())
-   .then((mensaje) => {
-       mensajes.innerHTML = "Factura creada correctamente.";
-   
-       const contenedorFacturasCreadas= document.getElementById("contenedorFacturasCreadas");
-       contenedorFacturasCreadas.innerHTML = "";
+  console.log({
+    id:  idFactura,
+    clientes_id: idCliente,
+    Fecha_factura: fecha,
+    Referencia_pago: referenciaPago,
+    Fecha_vencimiento: fechaVencimiento,
+    Servicio: servicio,
+    Cantidad: cantidad,
+    Precio: precio,
+    Impuesto: impuesto,
+    Total: total
+  });
 
-       setTimeout(() => {
-           location.reload(); // Refresca la página después de 3 segundos
-       }, 3000);
-   })
-   .catch((error) => {
-       mensajes.innerHTML = "Error al crear la factura: " + error;
-   });
- }
+  // Comprobar que los campos no estén vacíos
+  if (
+    fecha.length === 0 ||
+    referenciaPago.length === 0 ||
+    fechaVencimiento.length === 0 ||
+    servicio.length === 0 ||
+    cantidad === "" ||
+    precio === "" ||
+    impuesto === "" ||
+    total === ""
+  ) {
+    // Mostrar mensaje de error
+    mensajes.innerHTML = "Por favor, complete todos los campos.";
+    return;
+  }
+
+  // Enviar datos al servidor
+  const url = "http://localhost:4000/api/v1/facturas/";
+  fetch(url, {
+    method: "post",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      id: idFactura,
+      clientes_id: idCliente,
+      Fecha_factura: fecha,
+      Referencia_pago: referenciaPago,
+      Fecha_vencimiento: fechaVencimiento,
+      Servicio: servicio,
+      Cantidad: cantidad,
+      Precio: precio,
+      Impuesto: impuesto,
+      Total: total
+    })
+  })
+    .then((res) => res.json())
+    .then((factura) => {
+      // Mostrar la factura en la interfaz
+      const facturaElement = document.createElement("div");
+      facturaElement.classList.add("factura");
+      facturaElement.innerHTML = `
+        <p>ID: ${factura.id}</p>
+        <p>Cliente: ${factura.cliente}</p>
+        <p>Fecha: ${factura.fecha}</p>
+        <p>Referencia de Pago: ${factura.referenciaPago}</p>
+        <p>Fecha de Vencimiento: ${factura.fechaVencimiento}</p>
+        <p>Servicio: ${factura.servicio}</p>
+        <p>Cantidad: ${factura.cantidad}</p>
+        <p>Precio: ${factura.precio}</p>
+        <p>Impuesto: ${factura.impuesto}</p>
+        <p>Total: ${factura.total}</p>
+        
+
+      `;
+
+      // Agregar la factura al contenedor
+      contenedorFacturasCreadas.appendChild(facturaElement);
+
+      // Limpiar los campos del formulario
+      document.getElementById("idFactura").value = "";
+      document.getElementById("cliente").value = "";
+      document.getElementById("fecha").value = "";
+      document.getElementById("referencia").value = "";
+      document.getElementById("fecha_vencimiento").value = "";
+      document.getElementById("servicio").value = "";
+      document.getElementById("cantidad").value = "";
+      document.getElementById("precio").value = "";
+      document.getElementById("impuesto").value = "";
+      document.getElementById("total").value = "";
+
+      // Mostrar mensaje de éxito
+      mensajes.innerHTML = "Factura guardada correctamente.";
+    })
+    .catch((error) => {
+      // Mostrar mensaje de error
+      mensajes.innerHTML = "Error al guardar la factura.";
+    });
+}
 
  
   // Función para calcular el importe total de la línea
@@ -211,11 +284,6 @@ function calcularSubtotal() {
 
 
 
-// Función para guardar la factura en la base de datos
-document.addEventListener('DOMContentLoaded', function() { 
-//click para guardar la factura
-
-});
 
 
 
