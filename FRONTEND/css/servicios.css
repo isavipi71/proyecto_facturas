@@ -9,16 +9,6 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
-  
-}
-
-.imagen {
- width: 30%;
- display: flex;
- 
-}
-.imagen img {
-  width: 100%;
 }
 
 .informacion {
@@ -31,27 +21,35 @@
   max-width: 800px;
 }
 
-.contenido_nombre_servicio, .precio{
-  display: flex;
-  flex-direction: column;
+.imagen {
+  width: 30%;
+  min-height: 20vh;
+  margin: 0 auto;
+  margin-bottom: 30px;
+
+
 }
 
-.contenido_nombre_servicio>#servicio, #precio{
-    border: none; /* Elimina el borde */
-    outline: none; /* Elimina el contorno al enfocar */
-    background-color: transparent; /* Hace transparente el fondo */
-    border-bottom: 1px solid black; 
-    padding: 0; 
-    margin-top: 20px;
-    margin-bottom: 30px;
+.imagen label {
+  display: block;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
+
+#imagen input {
+  width: 100%;
+  height: auto;
+}
+ 
 
 .tipo{
   display: flex;
   margin-bottom: 30px;
 }
 
-.tipo input[type="checkbox"] {
+.tipo input[type="radio"] {
   margin-right: 10px;
 }
 
@@ -59,89 +57,120 @@
   margin-left: 50px;
 }
 
-.precio{
-  margin-bottom: 30px;
-}
-.precio label{
-  margin-bottom: 10px;
-}
 
-.acordeon{
+.contenido_nombre_servicio,
+.precio {
   display: flex;
-  flex-direction: column;
-  padding: 10px;
-}
-.acordeon-contenido {
-  display: none;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
-  margin-top: 2px;
-}
-
-.acordeon-btn {
-  background-color: rgb(2, 83, 115);
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  display: flex;
+  flex-direction: row;
   align-items: center;
 }
 
-.acordeon-btn:focus {
+.contenido_nombre_servicio > #servicio,
+#precio {
+  border: none;
   outline: none;
+  background-color: transparent;
+  border-bottom: 1px solid black;
+  padding: 0;
+  margin-top: 20px;
+  margin-bottom: 30px;
 }
 
-.acordeon-btn span {
-  margin-left: 5px;
+.precio label {
+  margin-bottom: 10px;
 }
 
-.acordeon-btn.active span {
-  transform: rotate(45deg);
+.precio input {
+  width: 30%;
+  height: 30px;
+  margin-left: 10px;
+}
+.descripcion, .info_adicional {
+  margin-bottom: 30px;
+}
+#descripcion, #info_adicional {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  border-bottom: 1px solid black;
+  padding: 0;
+  margin-top: 20px;
+  margin-bottom: 30px;
 }
 
-.acordeon-toggle {
-  display: none;
+#btn-agregar_servicio {
+  background-color: rgb(2, 83, 115);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.acordeon-toggle:checked + .acordeon-contenido {
-  background-color: #f1f1f1;
+#btn-agregar_servicio:hover {
+  background-color: rgb(0, 68, 94);
+  box-shadow: 0 0 10px rgb(0, 68, 94);
 }
 
-.acordeon-toggle:checked + .acordeon-btn + .acordeon-contenido {
-  display: block;
-  max-height: 500px; /* ajusta este valor según sea necesario */
-}
 
-.contenedor_guardar-deshacer i {
-  margin: 30px 0px 0x 30px;
-  
-}
 .servicios_creados{
   padding: 50px;
   border-radius: 20px;
   display: flex;
-
+  flex-direction: column;
+}
+.servicios_creados h2 {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
-.servicio{
-  margin: 15px;
-  border: 1px solid black;
-  border-radius: 10px;
-  width: 30%;
-  padding: 5px;
-  box-shadow: inset 0 -3em 3em rgb(196, 221, 242),
-  0 0 0 2px rgb(2, 83, 115),
-  0.3em 0.3em 1em rgb(196, 221, 242);
-  
+
+table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.servicio button {
+table th,
+table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid black;
+}
+
+table th {
+  background-color: rgb(2, 83, 115);
+  color: white;
+}
+
+table tr:nth-child(even) {
+  background-color: rgb(196, 221, 242);
+}
+
+table tr:hover {
+  background-color: rgb(2, 83, 115);
+  color: white;
+}
+
+
+
+#btn-guardar {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  width: 80px;
+}
+
+button#btn-guardar  {
+  padding: 40px;
   background-color: transparent; /* Elimina el fondo del botón */
   border: none; /* Elimina el borde del botón */
   cursor: pointer;
   margin-right: 20px; /* Espacio entre los botones */
 }
 
-.servicio button:hover {
-  color: rgb(2, 83, 115); /* Cambia el color del icono al pasar el mouse sobre él */
+button#btn-guardar:hover {
+  background-color: rgb(2, 83, 115); /* Cambia el color del icono al pasar el mouse sobre él */
 }
+

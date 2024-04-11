@@ -29,7 +29,8 @@ document.addEventListener("DOMContentLoaded", function() {
         cells[1].textContent = tipoServicio;
         cells[2].textContent = precioServicio;
         cells[3].textContent = descripcionServicio;
-        cells[4].innerHTML = '<button type="button" class="btn-editar">Editar</button> <button type="button" class="btn-eliminar">Eliminar</button>';
+        cells[4].innerHTML = 
+        '<button type="button" class="btn-editar">Editar</button> <button type="button" class="btn-eliminar">Eliminar</button>';
 
         // Limpiar los campos del formulario después de agregar el servicio
         document.getElementById("servicio").value = "";
