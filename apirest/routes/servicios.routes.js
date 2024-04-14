@@ -1,33 +1,37 @@
 const express = require('express');
-
 const router = express.Router();
+const conexion = require('../routes/conexion.js');
+
 
 // Ruta para guardar un servicio
-router.post('/servicios', async (req, res) => {
+router.post('/crearServicios', async (req, res) => {
     try {
         // Obtener los datos del servicio desde el body de la solicitud
-        const { nombre, precio, descripcion, infoAdicional  } = req.body;
-
-        // Realizar la petición al endpoint utilizando el fetch
-        const response = await fetch('http://localhost:4000/api/v1/servicios', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ nombre, descripcion, precio })
+        const data = 
+         { 
+            nombre, precio, descripcion, infoAdicional  
+        } = req.body;
+        const query = `INSERT INTO Servicios (nombre, precio, descripcion, info_adicional) VALUES ('${nombre}', ${precio}, '${descripcion}', '${infoAdicional}')`;
+        // Ejecutar la consulta
+         conexion.query(query, (error, result) => {
+            // Responder al cliente con un mensaje de éxito
+            if (error) {
+                return res.status(400).json({
+                    status: 400,
+                    mensaje: 'Error al crear el servicio',
+                });
+            }else
+            res.status(200).json({
+                status: 200,
+                mensaje: 'Servicio creado correctamente'
+            });
         });
-
-        // Verificar el estado de la respuesta
-        if (response.ok) {
-            // El servicio se guardó correctamente
-            res.status(200).json({ message: 'Servicio guardado correctamente' });
-        } else {
-            // Hubo un error al guardar el servicio
-            res.status(500).json({ error: 'Error al guardar el servicio' });
-        }
     } catch (error) {
-        // Hubo un error en el servidor
-        res.status(500).json({ error: 'Error en el servidor' });
+        res.status(500).json({
+            status: 500,
+            mensaje: 'Error en el servidor',
+            error: error
+        });
     }
 });
 

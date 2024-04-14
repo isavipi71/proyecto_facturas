@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+		
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <link rel="stylesheet" href="../css/servicios.css">
     <script src="../js/servicios.js" defer></script>
-
-    <title>Servicios</title>
+		<title>Servicios</title>
 </head>
+
 <body>
+	<aside>
+		<ul>
+			<li><i class="fas fa-plus"></i> Crear nuevo servicio</li>
+			<li><i class="fas fa-eye"></i> Ver servicios creados</li>
+			<li><a href="../index.html"><i class="fas fa-arrow-left"></i> Regresar</a></li>
+		</ul>
+	</aside>
+
 	<div id="servicios">
 		<div class="informacion">
 			<div class="imagen">
@@ -40,48 +48,42 @@
 			
 			<div class="descripcion">
 				<label for="descripcion">Descripción</label>
-				<textarea name="descripcion" id="descripcion" cols="20" rows="3"></textarea>
+				<input type="text" id="descripcion"> </input>
 			</div>
 			
 			<div class="info_adicional">
 				<label for="info_adicional">Información Adicional</label>
-				<textarea  id="info_adicional" cols="20" rows="10"></textarea>
+				<input type="text" id="info_adicional"> </input>
 			</div>
 
 			<div class="btns">
 				<button type="button" id="btn-agregar_servicio"> Agregar</button>
+				<button type="button" id="btn-guardar-servicios" ><i class="fas fa-save"></i> Guardar</button>
 		
 </div>
 </div>
-</div>
+	</div>
 
-<div class="servicios_creados">
-	<h2>Servicios</h2>
-	<table>
-		<thead>
-			<tr>
-				<th>Nombre</th>
-				<th>Tipo</th>
-				<th>Precio</th>
-				<th>Descripción</th>
-				<th>Acciones</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Nombre del servicio</td>
-				<td>Consumible</td>
-				<td>100</td>
-				<td>Descripción del servicio</td>
-				<td>
-					<button type="button" class="btn-editar">Editar</button>
-					<button type="button" class="btn-eliminar">Eliminar</button>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-	<button type="button" id="btn-guardar">Guardar</button>
-</div>
+	<div class="servicios_creados">
+		<h2>Servicios</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Tipo</th>
+					<th>Precio</th>
+					<th>Descripción</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>	
+				</tr>
+			</tbody>
+	
+		</table>
+	
+	</div>
 
 </body>
 </html>
